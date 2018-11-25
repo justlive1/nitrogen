@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="desktop">
     desktop
   </div>
 </template>
@@ -11,5 +11,7 @@
 </script>
 
 <style scoped>
+  .desktop {
 
+  }
 </style>
