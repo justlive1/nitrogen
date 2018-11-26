@@ -1,90 +1,60 @@
 <template>
   <div class="dock">
     <div class="dock-container">
-      <a class="dock-item">
-        <span>finder</span>
-        <img src="../../public/images/finder.png" alt="finder"/>
-      </a>
-      <a class="dock-item">
-        <span>launchpad</span>
-        <img src="../../public/images/launchpad.png" alt="launchpad"/>
-      </a>
-      <a class="dock-item">
-        <span>gitee</span>
-        <img src="../../public/images/gitee.png" alt="gitee"/>
-      </a>
-      <a class="dock-item">
-        <span>github</span>
-        <img src="../../public/images/github.png" alt="github"/>
-      </a>
-      <a class="dock-item">
-        <span>blog</span>
-        <img src="../../public/images/blog.png" alt="blog"/>
-      </a>
-      <a class="dock-item">
-        <span>book</span>
-        <img src="../../public/images/iBooks.png" alt="book"/>
-      </a>
-      <a class="dock-item">
-        <span>maps</span>
-        <img src="../../public/images/maps.png" alt="maps"/>
-      </a>
+      <img class="dock-item" src="../../public/images/finder.png" alt="finder"/>
+      <img class="dock-item" src="../../public/images/launchpad.png" alt="launchpad"/>
+      <img class="dock-item" src="../../public/images/gitee.png" alt="gitee"/>
+      <img class="dock-item" src="../../public/images/github.png" alt="github"/>
+      <img class="dock-item" src="../../public/images/blog.png" alt="blog"/>
+      <img class="dock-item" src="../../public/images/iBooks.png" alt="book"/>
+      <img class="dock-item" src="../../public/images/maps.png" alt="maps"/>
+      <img class="dock-item" src="../../public/images/trash.png" alt="trash"/>
     </div>
   </div>
 </template>
 
 <script>
+
   export default {
-    name: "Dock",
-    data() {
-      return {
-        originalWidth: [],
-        dockX: 0,
-        dockY: 0,
-        dockScale: 0
-      }
-    },
-    mounted() {
-      this.init();
-    },
+    name: "Dck",
     methods: {
-      init: function () {
-        let dockWrap = document.getElementsByClassName('dock-container')[0];
-        let dockItems = dockWrap.getElementsByClassName('dock-item');
-        for (let i = 0; i < dockItems.length; i++) {
-          this.originalWidth.push(dockItems[i].offsetWidth);
-          dockItems[i].width = parseInt(dockItems[i].offsetWidth / 2);
-        }
-
-        let _this = this;
-        dockWrap.onmousemove = function (e) {
-          e = e || window.event;
-          for (let i = 0; i < dockItems.length; i++) {
-            _this.dockX = e.clientX - (dockItems[i].offsetLeft + dockItems[i].offsetWidth / 2);
-            _this.dockY = dockItems[i].offsetTop + _this.getOffsetTop(dockWrap)
-                + dockItems[i].offsetHeight / 2
-                - e.clientY;
-            _this.dockScale = 1 - Math.sqrt(_this.dockX * _this.dockX + _this.dockY * _this.dockY)
-                / 300;
-            if (_this.dockScale < 0.5) {
-              _this.dockScale = 0.5;
-            }
-            dockItems[i].width = _this.originalWidth[i] * _this.dockScale;
-          }
-        };
-      },
-
       getOffsetTop: function (el) {
         if (el.offsetParent == null) {
           return el.offsetTop;
         }
         return el.offsetTop + this.getOffsetTop(el.offsetParent);
       }
+    },
+    mounted() {
+      const dockWrap = document.getElementsByClassName('dock-container')[0];
+      const img = document.getElementsByClassName('dock-item');
+      const originalWidth = [];
+      let imgScale = 0;
+      let x = 0, y = 0, i = 0;
+      for (i = 0; i < img.length; i++) {
+        originalWidth.push(120);
+        img[i].width = 60;
+      }
+      let _this = this;
+      dockWrap.onmousemove = function (e) {
+        e = e || window.event;
+        for (i = 0; i < img.length; i++) {
+          x = e.clientX - (img[i].offsetLeft + img[i].offsetWidth / 2);
+          y = img[i].offsetTop + _this.getOffsetTop(dockWrap) + img[i].offsetHeight / 2 - e.clientY;
+          imgScale = 1 - Math.sqrt(x * x + y * y) / 300;
+          if (imgScale < 0.5) {
+            imgScale = 0.5;
+          }
+          img[i].width = originalWidth[i] * imgScale;
+        }
+
+      }
     }
   }
 </script>
 
 <style scoped>
+
   .dock {
     width: 100%;
     bottom: 0px;
@@ -95,45 +65,14 @@
     z-index: 120;
   }
 
-  .dock-container {
-    position: relative;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.45);
-    width: 440px;
-    margin: 0 auto;
-  }
-
-  .dock-container a.dock-item {
-    display: inline-block;
-    font: bold 12px Arial, Helvetica, sans-serif;
-    width: 60px;
-    height: 60px;
-    color: #fff;
-    bottom: 0px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-  }
-
-  .dock-item span {
-    display: none;
+  .dock .dock-container {
     position: absolute;
-    top: -20px;
     width: 100%;
+    bottom: 0;
     text-align: center;
   }
 
-  .dock-item:hover {
-    cursor: pointer;
+  .dock .dock-container img {
   }
 
-  .dock-item:hover span {
-    display: unset;
-  }
-
-  .dock-item img {
-    border: none;
-    width: 100%;
-    height: 60px;
-  }
 </style>

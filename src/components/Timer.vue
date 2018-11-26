@@ -20,14 +20,8 @@
     methods: {
       getTime: function () {
         const date = new Date();
-        let value = weeks[date.getDay()]
-        const hour = date.getHours();
-        if (hour >= 0 && hour < 12) {
-          value += ' 上午' + hour;
-        } else {
-          value += ' 下午' + (hour - 12);
-        }
-        value += ":";
+        let value = (date.getMonth() + 1) + "月" + date.getDate() + "日 " + weeks[date.getDay()] + " "
+            + date.getHours() + ":"
         let minutes = date.getMinutes();
         if (minutes < 10) {
           value += 0;
