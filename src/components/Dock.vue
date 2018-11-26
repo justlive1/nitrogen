@@ -35,7 +35,52 @@
 
 <script>
   export default {
-    name: "Dock"
+    name: "Dock",
+    data() {
+      return {
+        originalWidth: [],
+        dockX: 0,
+        dockY: 0,
+        dockScale: 0
+      }
+    },
+    mounted() {
+      this.init();
+    },
+    methods: {
+      init: function () {
+        let dockWrap = document.getElementsByClassName('dock-container')[0];
+        let dockItems = dockWrap.getElementsByClassName('dock-item');
+        for (let i = 0; i < dockItems.length; i++) {
+          this.originalWidth.push(dockItems[i].offsetWidth);
+          dockItems[i].width = parseInt(dockItems[i].offsetWidth / 2);
+        }
+
+        let _this = this;
+        dockWrap.onmousemove = function (e) {
+          e = e || window.event;
+          for (let i = 0; i < dockItems.length; i++) {
+            _this.dockX = e.clientX - (dockItems[i].offsetLeft + dockItems[i].offsetWidth / 2);
+            _this.dockY = dockItems[i].offsetTop + _this.getOffsetTop(dockWrap)
+                + dockItems[i].offsetHeight / 2
+                - e.clientY;
+            _this.dockScale = 1 - Math.sqrt(_this.dockX * _this.dockX + _this.dockY * _this.dockY)
+                / 300;
+            if (_this.dockScale < 0.5) {
+              _this.dockScale = 0.5;
+            }
+            dockItems[i].width = _this.originalWidth[i] * _this.dockScale;
+          }
+        };
+      },
+
+      getOffsetTop: function (el) {
+        if (el.offsetParent == null) {
+          return el.offsetTop;
+        }
+        return el.offsetTop + this.getOffsetTop(el.offsetParent);
+      }
+    }
   }
 </script>
 

@@ -42,5 +42,7 @@
 <style scoped>
   .tools-icon.tools-time {
     width: 125px;
+    font-weight: bold;
+    font-size: 12px;
   }
 </style>
