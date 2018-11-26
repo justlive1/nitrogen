@@ -1,15 +1,70 @@
 <template>
-  <div>
-    tools
+  <div class="tools">
+    <div class="tools-left">
+      <div class="tools-icon"><span class="fa fa-apple"></span></div>
+      <div class="tools-icon"><span class="fa fa-safari"></span></div>
+    </div>
+    <div class="tools-middle"></div>
+    <div class="tools-right">
+      <div class="tools-icon"><span class="fa fa-battery-full"></span></div>
+      <timer></timer>
+      <div class="tools-icon tools-message"><span class="fa fa-list-ul"></span></div>
+      <div class="tools-icon tools-show-desktop">
+        <span>&nbsp;</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+  import Timer from './Timer';
+
   export default {
-    name: "Tools"
+    name: "Tools",
+    components: {
+      Timer
+    }
   }
 </script>
 
 <style scoped>
+  .tools {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 120;
+  }
 
+  .tools .tools-left {
+    width: 200px;
+    height: 100%;
+    float: left;
+  }
+
+  .tools-icon {
+    text-align: center;
+    width: 30px;
+    height: 100%;
+    display: inline-block;
+  }
+
+  .tools .tools-icon:hover {
+    color: white;
+    background-color: rgba(49, 156, 241, 0.71);
+    cursor: pointer;
+  }
+
+  .tools .tools-right {
+    float: right;
+    height: 100%;
+  }
+
+  .tools .tools-right .tools-show-desktop {
+    border-left: grey 1px solid;
+    width: 5px;
+    margin-left: 3px;
+  }
 </style>

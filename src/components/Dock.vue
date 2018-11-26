@@ -47,7 +47,7 @@
     left: 0px;
     height: 65px;
     text-align: center;
-    z-index: 20;
+    z-index: 120;
   }
 
   .dock-container {
@@ -72,9 +72,18 @@
 
   .dock-item span {
     display: none;
-    padding: 3px 0px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    top: -20px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .dock-item:hover {
+    cursor: pointer;
+  }
+
+  .dock-item:hover span {
+    display: unset;
   }
 
   .dock-item img {
