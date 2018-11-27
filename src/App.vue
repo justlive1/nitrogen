@@ -15,8 +15,6 @@
     name: 'app',
     components: {
       Desktop, Dock, Tools
-    },
-    created(){
     }
   }
 </script>
