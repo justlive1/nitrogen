@@ -1,5 +1,6 @@
 <template>
   <div class="dock">
+    <div class="dock-mask"></div>
     <div class="dock-container">
       <img class="dock-item" src="../../public/images/finder.png" alt="finder"/>
       <img class="dock-item" src="../../public/images/launchpad.png" alt="launchpad"/>
@@ -23,32 +24,38 @@
           return el.offsetTop;
         }
         return el.offsetTop + this.getOffsetTop(el.offsetParent);
+      },
+      initDockItem: function (dockItems, dockMask) {
+        for (let i = 0; i < dockItems.length; i++) {
+          dockItems[i].width = 60;
+        }
+        dockMask.style.width = dockItems.length * 60 + 40 + 'px';
+      },
+      mouseOnDockItem: function (e, dockWrap, dockItems, dockMask) {
+        e = e || window.event;
+        let originalMaskWidth = 0;
+        for (let i = 0; i < dockItems.length; i++) {
+          let x = e.clientX - (dockItems[i].offsetLeft + dockItems[i].offsetWidth / 2);
+          let y = dockItems[i].offsetTop + this.getOffsetTop(dockWrap) + dockItems[i].offsetHeight
+              / 2 - e.clientY;
+          let imgScale = 1 - Math.sqrt(x * x + y * y) / 300;
+          if (imgScale < 0.5) {
+            imgScale = 0.5;
+          }
+          dockItems[i].width = 120 * imgScale;
+          originalMaskWidth += dockItems[i].width;
+        }
+        dockMask.style.width = originalMaskWidth + 40 + 'px';
       }
     },
     mounted() {
       const dockWrap = document.getElementsByClassName('dock-container')[0];
-      const img = document.getElementsByClassName('dock-item');
-      const originalWidth = [];
-      let imgScale = 0;
-      let x = 0, y = 0, i = 0;
-      for (i = 0; i < img.length; i++) {
-        originalWidth.push(120);
-        img[i].width = 60;
-      }
-      let _this = this;
-      dockWrap.onmousemove = function (e) {
-        e = e || window.event;
-        for (i = 0; i < img.length; i++) {
-          x = e.clientX - (img[i].offsetLeft + img[i].offsetWidth / 2);
-          y = img[i].offsetTop + _this.getOffsetTop(dockWrap) + img[i].offsetHeight / 2 - e.clientY;
-          imgScale = 1 - Math.sqrt(x * x + y * y) / 300;
-          if (imgScale < 0.5) {
-            imgScale = 0.5;
-          }
-          img[i].width = originalWidth[i] * imgScale;
-        }
-
-      }
+      const dockItems = document.getElementsByClassName('dock-item');
+      const dockMask = document.getElementsByClassName('dock-mask')[0];
+      this.initDockItem(dockItems, dockMask);
+      dockWrap.addEventListener('mousemove',
+          e => this.mouseOnDockItem(e, dockWrap, dockItems, dockMask));
+      dockWrap.addEventListener('mouseleave', () => this.initDockItem(dockItems, dockMask));
     }
   }
 </script>
@@ -57,19 +64,26 @@
 
   .dock {
     width: 100%;
-    bottom: 0px;
-    position: absolute;
-    left: 0px;
     height: 65px;
-    text-align: center;
     z-index: 120;
+    position: absolute;
+    bottom: 0px;
+  }
+
+  .dock .dock-mask {
+    background-color: rgba(255, 255, 255, 0.45);
+    width: 520px;
+    height: 65px;
+    border-radius: 5px;
+    margin: 0 auto;
   }
 
   .dock .dock-container {
     position: absolute;
-    width: 100%;
     bottom: 0;
     text-align: center;
+    width: 100%;
+    z-index: 120;
   }
 
   .dock .dock-container img {

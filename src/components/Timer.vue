@@ -9,7 +9,7 @@
     name: "Timer",
     data() {
       return {
-        timer: '&nbsp;'
+        timer: this.getTime()
       }
     },
     created() {
@@ -21,12 +21,12 @@
       getTime: function () {
         const date = new Date();
         let value = (date.getMonth() + 1) + "月" + date.getDate() + "日 " + weeks[date.getDay()] + " "
-            + date.getHours() + ":"
+            + date.getHours() + ":";
         let minutes = date.getMinutes();
         if (minutes < 10) {
           value += 0;
         }
-        value += minutes
+        value += minutes;
         return value;
       }
     }
