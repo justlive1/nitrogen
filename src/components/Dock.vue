@@ -4,35 +4,35 @@
     <div class="dock-container">
       <a>
         <span>finder</span>
-        <img class="dock-item" src="../../public/images/finder.png" alt="finder"/>
+        <img class="dock-item" src="images/finder.png" alt="finder"/>
       </a>
       <a>
         <span>launchpad</span>
-        <img class="dock-item" src="../../public/images/launchpad.png" alt="launchpad"/>
+        <img class="dock-item" src="images/launchpad.png" alt="launchpad"/>
       </a>
       <a href="https://gitee.com/justlive1" target="_blank">
         <span>gitee</span>
-        <img class="dock-item" src="../../public/images/gitee.png" alt="gitee"/>
+        <img class="dock-item" src="images/gitee.png" alt="gitee"/>
       </a>
       <a href="https://github.com/justlive1" target="_blank">
         <span>github</span>
-        <img class="dock-item" src="../../public/images/github.png" alt="github"/>
+        <img class="dock-item" src="images/github.png" alt="github"/>
       </a>
       <a href="http://www.justlive.vip/blog" target="_blank">
         <span>blog</span>
-        <img class="dock-item" src="../../public/images/blog.png" alt="blog"/>
+        <img class="dock-item" src="images/blog.png" alt="blog"/>
       </a>
       <a href="http://www.justlive.vip/library" target="_blank">
         <span>book</span>
-        <img class="dock-item" src="../../public/images/iBooks.png" alt="book"/>
+        <img class="dock-item" src="images/iBooks.png" alt="book"/>
       </a>
       <a>
         <span>maps</span>
-        <img class="dock-item" src="../../public/images/maps.png" alt="maps"/>
+        <img class="dock-item" src="images/maps.png" alt="maps"/>
       </a>
       <a>
         <span>trash</span>
-        <img class="dock-item" src="../../public/images/trash.png" alt="trash"/>
+        <img class="dock-item" src="images/trash.png" alt="trash"/>
       </a>
     </div>
   </div>
