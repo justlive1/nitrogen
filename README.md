@@ -1,4 +1,4 @@
 # nitrogen
 
 #### 项目介绍
-mac ui
+mac桌面ui
