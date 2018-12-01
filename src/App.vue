@@ -15,9 +15,13 @@
     name: 'app',
     components: {
       Desktop, Dock, Tools
+    }, data() {
+      return {
+        mainUrl: 'url(images/main.jpg)'
+      }
     },
     mounted() {
-      document.getElementById('app').style.backgroundImage = 'url(images/main.jpg)';
+      document.getElementById('app').style.backgroundImage = this.mainUrl;
     }
   }
 </script>

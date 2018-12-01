@@ -10,21 +10,9 @@
         <span>launchpad</span>
         <img class="dock-item" src="images/launchpad.png" alt="launchpad"/>
       </a>
-      <a href="https://gitee.com/justlive1" target="_blank">
-        <span>gitee</span>
-        <img class="dock-item" src="images/gitee.png" alt="gitee"/>
-      </a>
-      <a href="https://github.com/justlive1" target="_blank">
-        <span>github</span>
-        <img class="dock-item" src="images/github.png" alt="github"/>
-      </a>
-      <a href="http://www.justlive.vip/blog" target="_blank">
-        <span>blog</span>
-        <img class="dock-item" src="images/blog.png" alt="blog"/>
-      </a>
-      <a href="http://www.justlive.vip/library" target="_blank">
-        <span>book</span>
-        <img class="dock-item" src="images/iBooks.png" alt="book"/>
+      <a v-for="dock in docks" :key="dock.alt" @click="dockClick(dock)">
+        <span>{{dock.alt}}</span>
+        <img class="dock-item" :src="dock.src" :alt="dock.alt"/>
       </a>
       <a>
         <span>maps</span>
@@ -41,7 +29,28 @@
 <script>
 
   export default {
-    name: "Dck",
+    name: "Dock",
+    data() {
+      return {
+        docks: []
+      }
+    },
+    created() {
+      if (process.env.VUE_APP_DOCK_MODE === 'static') {
+        this.docks = JSON.parse(process.env.VUE_APP_DOCK_VAL);
+      } else {
+        //ajax
+      }
+    },
+    mounted() {
+      const dockWrap = document.getElementsByClassName('dock-container')[0];
+      const dockItems = document.getElementsByClassName('dock-item');
+      const dockMask = document.getElementsByClassName('dock-mask')[0];
+      this.initDockItem(dockItems, dockMask);
+      dockWrap.addEventListener('mousemove',
+          e => this.mouseOnDockItem(e, dockWrap, dockItems, dockMask));
+      dockWrap.addEventListener('mouseleave', () => this.initDockItem(dockItems, dockMask));
+    },
     methods: {
       getOffsetTop: function (el) {
         if (el.offsetParent == null) {
@@ -70,16 +79,12 @@
           originalMaskWidth += dockItems[i].width;
         }
         dockMask.style.width = originalMaskWidth + 40 + 'px';
+      },
+      dockClick: function (dock) {
+        if (dock.type === '1') {
+          window.open(dock.url);
+        }
       }
-    },
-    mounted() {
-      const dockWrap = document.getElementsByClassName('dock-container')[0];
-      const dockItems = document.getElementsByClassName('dock-item');
-      const dockMask = document.getElementsByClassName('dock-mask')[0];
-      this.initDockItem(dockItems, dockMask);
-      dockWrap.addEventListener('mousemove',
-          e => this.mouseOnDockItem(e, dockWrap, dockItems, dockMask));
-      dockWrap.addEventListener('mouseleave', () => this.initDockItem(dockItems, dockMask));
     }
   }
 </script>
@@ -91,7 +96,7 @@
     height: 65px;
     z-index: 120;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
   }
 
   .dock .dock-mask {
@@ -112,7 +117,7 @@
 
   .dock .dock-container a span {
     display: none;
-    padding: 2px 0px;
+    padding: 2px 0;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.45);
     position: absolute;
