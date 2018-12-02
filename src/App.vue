@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <tools></tools>
+    <tools v-on:showMessage="showMessage"></tools>
     <desktop></desktop>
-    <dock></dock>
+    <dock :docks="docks"></dock>
+    <message :messageVisible="messageVisible"></message>
   </div>
 </template>
 
@@ -10,18 +11,34 @@
   import Desktop from './components/Desktop';
   import Dock from './components/Dock';
   import Tools from './components/Tools';
+  import Message from './components/Message';
 
   export default {
     name: 'app',
     components: {
-      Desktop, Dock, Tools
-    }, data() {
+      Desktop, Dock, Tools, Message
+    },
+    data() {
       return {
-        mainUrl: 'url(images/main.jpg)'
+        mainUrl: 'url(images/main.jpg)',
+        docks: [],
+        messageVisible: false
+      }
+    },
+    created() {
+      if (process.env.VUE_APP_DOCK_MODE === 'static') {
+        this.docks = JSON.parse(process.env.VUE_APP_DOCK_VAL);
+      } else {
+        //ajax
       }
     },
     mounted() {
       document.getElementById('app').style.backgroundImage = this.mainUrl;
+    },
+    methods: {
+      showMessage: function (payload) {
+        this.messageVisible = payload;
+      }
     }
   }
 </script>

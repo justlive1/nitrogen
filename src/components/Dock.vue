@@ -30,18 +30,7 @@
 
   export default {
     name: "Dock",
-    data() {
-      return {
-        docks: []
-      }
-    },
-    created() {
-      if (process.env.VUE_APP_DOCK_MODE === 'static') {
-        this.docks = JSON.parse(process.env.VUE_APP_DOCK_VAL);
-      } else {
-        //ajax
-      }
-    },
+    props: ['docks'],
     mounted() {
       const dockWrap = document.getElementsByClassName('dock-container')[0];
       const dockItems = document.getElementsByClassName('dock-item');
@@ -93,16 +82,16 @@
 
   .dock {
     width: 100%;
-    height: 65px;
+    height: 70px;
     z-index: 120;
     position: absolute;
     bottom: 0;
   }
 
   .dock .dock-mask {
-    background-color: rgba(255, 255, 255, 0.45);
+    background-color: rgba(15, 15, 0, 0.45);
     width: 520px;
-    height: 65px;
+    height: 70px;
     border-radius: 5px;
     margin: 0 auto;
   }

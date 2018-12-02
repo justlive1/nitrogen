@@ -8,7 +8,9 @@
     <div class="tools-right">
       <div class="tools-icon"><span class="fa fa-battery-full"></span></div>
       <timer></timer>
-      <div class="tools-icon tools-message"><span class="fa fa-list-ul"></span></div>
+      <div class="tools-icon tools-message" @click="messageClick"><span
+          class="fa fa-list-ul"></span>
+      </div>
       <div class="tools-icon tools-show-desktop">
         <span>&nbsp;</span>
       </div>
@@ -23,6 +25,15 @@
     name: "Tools",
     components: {
       Timer
+    },
+    data() {
+      return {message: false}
+    },
+    methods: {
+      messageClick: function () {
+        this.message = !this.message;
+        this.$emit('showMessage', this.message);
+      }
     }
   }
 </script>
@@ -34,8 +45,9 @@
     top: 0;
     height: 30px;
     line-height: 30px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(15,15,0, 0.4);
     z-index: 120;
+    color: #fff;
   }
 
   .tools .tools-left {
