@@ -5,7 +5,13 @@
         <div :class="{active: messageType === 0}" @click="messageTypeChange(0)">今天</div>
         <div :class="{active: messageType === 1}" @click="messageTypeChange(1)">通知</div>
       </div>
-      <div class="message-body">
+      <div class="message-body" v-if="messageType === 0">
+        <div class="message-body-calendar">
+          <div class="message-body-calendar-date normal-date">{{normalDate}}</div>
+          <div class="message-body-calendar-date lunar-date">{{lunarDate}}</div>
+        </div>
+      </div>
+      <div class="message-body" v-if="messageType === 1">
 
       </div>
     </div>
@@ -13,12 +19,17 @@
 </template>
 
 <script>
+  import Calender from './Calendar';
+
   export default {
     name: "Message",
     props: ['messageVisible'],
     data() {
       return {
-        messageType: 0
+        messageType: 0,
+        date: new Date(),
+        normalDate: Calender.dateOfYear(this.date) + " " + Calender.weekOfDate(this.date, true),
+        lunarDate: Calender.lunarDate(this.date)
       }
     },
     methods: {
@@ -69,6 +80,23 @@
   }
 
   .message-body {
+
+  }
+
+  .message-body-calendar {
+    margin: 15px 0;
+  }
+
+  .message-body-calendar .message-body-calendar-date {
+    padding: 0 33px;
+    color: #585858;
+  }
+
+  .message-body-calendar-date.normal-date {
+    font-size: 30px;
+  }
+
+  .message-body-calendar-date.lunar-date {
 
   }
 

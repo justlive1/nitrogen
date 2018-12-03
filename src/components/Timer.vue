@@ -3,32 +3,19 @@
 </template>
 
 <script>
-  const weeks = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  import Calendar from './Calendar';
 
   export default {
     name: "Timer",
     data() {
       return {
-        timer: this.getTime()
+        timer: Calendar.dateFormatMacOs()
       }
     },
     created() {
       setInterval(() => {
-        this.timer = this.getTime();
+        this.timer = Calendar.dateFormatMacOs();
       }, 1000);
-    },
-    methods: {
-      getTime: function () {
-        const date = new Date();
-        let value = (date.getMonth() + 1) + "月" + date.getDate() + "日 " + weeks[date.getDay()] + " "
-            + date.getHours() + ":";
-        let minutes = date.getMinutes();
-        if (minutes < 10) {
-          value += 0;
-        }
-        value += minutes;
-        return value;
-      }
     }
   }
 </script>
