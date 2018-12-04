@@ -10,6 +10,9 @@
           <div class="message-body-calendar-date normal-date">{{normalDate}}</div>
           <div class="message-body-calendar-date lunar-date">{{lunarDate}}</div>
         </div>
+
+        <notice v-for="item in todayNotices" :icon="item.icon" :title="item.title"
+                :type="item.type" :raw="item.raw" v-bind:key="item.title"></notice>
       </div>
       <div class="message-body" v-if="messageType === 1">
 
@@ -20,16 +23,26 @@
 
 <script>
   import Calender from './Calendar';
+  import Notice from './Notice';
 
   export default {
     name: "Message",
     props: ['messageVisible'],
+    components: {
+      Notice
+    },
     data() {
       return {
         messageType: 0,
         date: new Date(),
         normalDate: Calender.dateOfYear(this.date) + " " + Calender.weekOfDate(this.date, true),
-        lunarDate: Calender.lunarDate(this.date)
+        lunarDate: Calender.lunarDate(this.date),
+        todayNotices: [{
+          icon: '<img class="notice-header-icon-img" src="images/timg.jpg" width="15px" height="15px" />',
+          title: '天气',
+          type: 1,
+          raw: 'xxxx'
+        }]
       }
     },
     methods: {
