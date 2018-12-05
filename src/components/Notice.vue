@@ -40,6 +40,11 @@
     vertical-align: middle;
   }
 
+  .notice-header-icon >>> img {
+    width: 15px;
+    height: 15px;
+  }
+
   .notice-header-title {
     font-size: 10px;
     margin: 0 5px;
