@@ -41,7 +41,7 @@
           icon: '<img class="notice-header-icon-img" src="images/weather.png" />',
           title: '天气',
           type: 1,
-          raw: 'xxxx'
+          raw: '<div></div>'
         }],
         historyNotices: []
       }

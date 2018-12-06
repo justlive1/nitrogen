@@ -18,7 +18,8 @@
       icon: String,
       title: String,
       type: Number,
-      raw: String
+      raw: String,
+      time: Date
     }
   }
 </script>
