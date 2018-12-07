@@ -8,7 +8,7 @@
     <div class="tools-right">
       <div class="tools-icon"><span class="fa fa-battery-full"></span></div>
       <timer></timer>
-      <div class="tools-icon tools-message" @click="messageClick"><span
+      <div class="tools-icon tools-notification-center" @click="notificationCenterClick()"><span
           class="fa fa-list-ul"></span>
       </div>
       <div class="tools-icon tools-show-desktop">
@@ -27,12 +27,12 @@
       Timer
     },
     data() {
-      return {message: false}
+      return {notificationCenterVisible: false}
     },
     methods: {
-      messageClick: function () {
-        this.message = !this.message;
-        this.$emit('showMessage', this.message);
+      notificationCenterClick: function () {
+        this.notificationCenterVisible = !this.notificationCenterVisible;
+        this.$emit('showNotificationCenter', this.notificationCenterVisible);
       }
     }
   }
@@ -45,7 +45,7 @@
     top: 0;
     height: 30px;
     line-height: 30px;
-    background-color: rgba(15,15,0, 0.4);
+    background-color: rgba(15, 15, 0, 0.4);
     z-index: 120;
     color: #fff;
   }

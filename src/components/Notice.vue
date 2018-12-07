@@ -1,26 +1,22 @@
 <template>
   <div class="notice">
     <div class="notice-header">
-      <span class="notice-header-icon" v-html="icon"></span>
-      <span class="notice-header-title">{{title}}</span>
+      <span class="notice-header-icon">
+        <slot name="notice-header-icon"></slot>
+      </span>
+      <span class="notice-header-title">
+        <slot name="notice-header-title"></slot>
+      </span>
     </div>
     <div class="notice-body">
-      <div class="notice-body-text" v-if="type === 0">{{raw}}</div>
-      <div class="notice-body-html" v-if="type === 1" v-html="raw"></div>
+      <slot name="notice-body"></slot>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "Notice",
-    props: {
-      icon: String,
-      title: String,
-      type: Number,
-      raw: String,
-      time: Date
-    }
+    name: "Notice"
   }
 </script>
 

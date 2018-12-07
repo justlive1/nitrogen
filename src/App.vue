@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <tools v-on:showMessage="showMessage"></tools>
+    <tools v-on:showNotificationCenter="showNotificationCenter"></tools>
     <desktop></desktop>
     <dock :docks="docks"></dock>
-    <message :messageVisible="messageVisible"></message>
+    <notification-center
+        :notificationCenterVisible="notificationCenterVisible"></notification-center>
   </div>
 </template>
 
@@ -11,18 +12,18 @@
   import Desktop from './components/Desktop';
   import Dock from './components/Dock';
   import Tools from './components/Tools';
-  import Message from './components/Message';
+  import NotificationCenter from './components/NotificationCenter';
 
   export default {
     name: 'app',
     components: {
-      Desktop, Dock, Tools, Message
+      Desktop, Dock, Tools, NotificationCenter
     },
     data() {
       return {
         mainUrl: 'url(images/main.jpg)',
         docks: [],
-        messageVisible: false
+        notificationCenterVisible: false
       }
     },
     created() {
@@ -36,8 +37,8 @@
       document.getElementById('app').style.backgroundImage = this.mainUrl;
     },
     methods: {
-      showMessage: function (payload) {
-        this.messageVisible = payload;
+      showNotificationCenter: function (payload) {
+        this.notificationCenterVisible = payload;
       }
     }
   }
