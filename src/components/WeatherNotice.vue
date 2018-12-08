@@ -7,10 +7,10 @@
       天气
     </template>
     <template slot="notice-body">
-      <div>
-        <span>{{weather.city}}</span>
-        <span>{{weather.type}}</span>
-        <span>{{weather.temperature}}</span>
+      <div class="weather-item">
+        <div class="weather-city">{{weather.city}}</div>
+        <div class="weather-type">{{weather.type}}</div>
+        <div class="weather-temperature">{{weather.temperature}}</div>
       </div>
     </template>
   </notice>
@@ -33,5 +33,28 @@
 </script>
 
 <style scoped>
+  .weather-item {
+    height: 35px;
+    line-height: 35px;
+  }
 
+  .weather-item div {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .weather-city {
+    width: 20%;
+    float: left;
+  }
+
+  .weather-type {
+    width: 55%;
+    text-align: right !important;
+  }
+
+  .weather-temperature {
+    width: 20%;
+    float: right;
+  }
 </style>
