@@ -136,6 +136,48 @@ export default {
       return this.lunarYear(date) + this.lunarDateI18n(
           dateData[1][1] + day - (dateData[1][0] % 100))
     }
+  },
+
+  dayAgo: function (time) {
+    let date = new Date(time);
+    let now = new Date();
+    let offset = now.getDate() - date.getDate()
+    // >3天 返回日期
+    if (offset > 3) {
+      return (date.getMonth() + 1) + '月' + date.getDate() + '日';
+    } else if (offset > 1) {
+      return offset + '天前';
+    } else if (offset === 1) {
+      return '昨天';
+    } else {
+      return '今天';
+    }
+  },
+
+  timeAgo: function (time) {
+    let date = new Date(time);
+    let now = new Date();
+    let text = '';
+    if (now.getDate() - date.getDate() === 1) {
+      text += '昨天 ';
+    }
+
+    let stamp = now.getTime() - date.getTime();
+    if (stamp < 1000 * 60) {
+      return '刚刚';
+    } else if (stamp < 1000 * 60 * 60) {
+      return ((stamp / 1000 / 60) | 0) + '分钟前';
+    } else if (stamp < 1000 * 60 * 60 * 2) {
+      return ((stamp / 1000 / 60 / 60) | 0) + '小时前';
+    } else {
+      let hour = date.getHours(), mins = date.getMinutes();
+      if (hour < 13) {
+        text += '上午' + hour + ':' + mins;
+      } else {
+        text += '下午' + (hour - 12) + ":" + mins;
+      }
+    }
+    return text;
   }
 
 }

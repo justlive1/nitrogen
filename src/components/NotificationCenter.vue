@@ -17,10 +17,13 @@
 
         <weather-notice></weather-notice>
 
+        <copyright></copyright>
+
       </div>
       <div class="notification-center-body" v-if="notificationCenterType === 1">
-        <message-notice v-for="msg in messageNotices" :title="msg.title"
-                        :body="msg.body" :key="msg.id"></message-notice>
+        <message-notice v-for="msg in messageNotices" :icon="msg.icon" :tip="msg.tip"
+                        :title="msg.title" :body="msg.body" :time="msg.time"
+                        :key="msg.id"></message-notice>
       </div>
     </div>
   </transition>
@@ -30,6 +33,7 @@
   import Calender from './Calendar';
   import WeatherNotice from './WeatherNotice';
   import MessageNotice from './MessageNotice';
+  import Copyright from './Copyright';
 
   export default {
     name: "NotificationCenter",
@@ -38,7 +42,7 @@
       messageNotices: Array
     },
     components: {
-      WeatherNotice, MessageNotice
+      WeatherNotice, MessageNotice, Copyright
     },
     data() {
       return {
@@ -96,7 +100,8 @@
   }
 
   .notification-center-body {
-
+    position: relative;
+    height: calc(100% - 70px);
   }
 
   .notification-center-body-calendar {

@@ -1,10 +1,11 @@
 <template>
   <notice>
     <template slot="notice-header-icon">
-      <img class="notice-header-icon-img" src="images/message.png"/>
+      <img class="notice-header-icon-img" :src="icon"/>
     </template>
     <template slot="notice-header-title">
-      消息
+      <span class="message-tip">{{tip}}</span>
+      <span class="message-time">{{timeAgo}}</span>
     </template>
     <template slot="notice-body">
       <div class="message-item">
@@ -17,13 +18,25 @@
 
 <script>
   import Notice from './Notice';
+  import Calendar from './Calendar';
 
   export default {
     name: "MessageNotice",
     components: {
       Notice
     },
-    props: ['title', 'body']
+    props: {
+      icon: String,
+      tip: String,
+      title: String,
+      body: String,
+      time: Date
+    },
+    computed: {
+      timeAgo: function () {
+        return Calendar.timeAgo(this.time);
+      }
+    }
   }
 </script>
 
@@ -40,5 +53,11 @@
   .message-item .message-body {
     font-size: 10px;
     color: #4e4e4e;
+  }
+
+  .message-time {
+    float: right;
+    margin-right: 10px;
+    line-height: 22px;
   }
 </style>

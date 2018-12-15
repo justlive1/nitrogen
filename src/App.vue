@@ -37,8 +37,14 @@
     mounted() {
       document.getElementById('app').style.backgroundImage = this.mainUrl;
 
-      this.addMessage(
-          {id: ~~(Math.random() * 10000), title: '分布式任务调度', body: '登录账号：frost 登录密码：frost'});
+      this.addMessage({
+        id: ~~(Math.random() * 10000),
+        icon: 'images/message.png',
+        tip: '消息',
+        title: '分布式任务调度',
+        body: '登录账号：frost 登录密码：frost',
+        time: new Date()
+      });
     },
     methods: {
       showNotificationCenter: function (payload) {
