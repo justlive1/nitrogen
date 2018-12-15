@@ -6,6 +6,12 @@
     </div>
     <div class="tools-middle"></div>
     <div class="tools-right">
+      <div class="tools-icon copyright">
+        <img src="images/beian.png" style="float: left;">
+        <span class="copyright-beian">粤公网安备 44010302000485号</span>
+        <span class="copyright-icp">粤ICP备18059277号-1</span>
+        <span>&nbsp;</span>
+      </div>
       <div class="tools-icon"><span class="fa fa-battery-full"></span></div>
       <timer></timer>
       <div class="tools-icon tools-notification-center" @click="notificationCenterClick()"><span
@@ -61,6 +67,24 @@
     width: 30px;
     height: 100%;
     display: inline-block;
+  }
+
+  .tools-icon.copyright {
+    width: 200px;
+    font-size: 10px;
+    position: relative;
+  }
+
+  .copyright-beian {
+    position: absolute;
+    left: 25px;
+    top: -7px;
+  }
+
+  .copyright-icp {
+    position: absolute;
+    left: 25px;
+    top: 7px;
   }
 
   .tools .tools-icon:hover {

@@ -19,6 +19,8 @@
 
       </div>
       <div class="notification-center-body" v-if="notificationCenterType === 1">
+        <message-notice v-for="msg in messageNotices" :title="msg.title"
+                        :body="msg.body" :key="msg.id"></message-notice>
       </div>
     </div>
   </transition>
@@ -27,20 +29,23 @@
 <script>
   import Calender from './Calendar';
   import WeatherNotice from './WeatherNotice';
+  import MessageNotice from './MessageNotice';
 
   export default {
     name: "NotificationCenter",
-    props: ['notificationCenterVisible'],
+    props: {
+      notificationCenterVisible: Boolean,
+      messageNotices: Array
+    },
     components: {
-      WeatherNotice
+      WeatherNotice, MessageNotice
     },
     data() {
       return {
         notificationCenterType: 0,
         date: new Date(),
         normalDate: Calender.dateOfYear(this.date) + " " + Calender.weekOfDate(this.date, true),
-        lunarDate: Calender.lunarDate(this.date),
-        historyNotices: []
+        lunarDate: Calender.lunarDate(this.date)
       }
     },
     methods: {

@@ -3,8 +3,8 @@
     <tools v-on:showNotificationCenter="showNotificationCenter"></tools>
     <desktop></desktop>
     <dock :docks="docks"></dock>
-    <notification-center
-        :notificationCenterVisible="notificationCenterVisible"></notification-center>
+    <notification-center :notificationCenterVisible="notificationCenterVisible"
+                         :messageNotices="messageNotices"></notification-center>
   </div>
 </template>
 
@@ -23,7 +23,8 @@
       return {
         mainUrl: 'url(images/main.jpg)',
         docks: [],
-        notificationCenterVisible: false
+        notificationCenterVisible: false,
+        messageNotices: []
       }
     },
     created() {
@@ -35,10 +36,16 @@
     },
     mounted() {
       document.getElementById('app').style.backgroundImage = this.mainUrl;
+
+      this.addMessage(
+          {id: ~~(Math.random() * 10000), title: '分布式任务调度', body: '登录账号：frost 登录密码：frost'});
     },
     methods: {
       showNotificationCenter: function (payload) {
         this.notificationCenterVisible = payload;
+      },
+      addMessage: function (message) {
+        this.messageNotices.push(message);
       }
     }
   }
