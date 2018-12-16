@@ -23,7 +23,7 @@
       <div class="notification-center-body" v-if="notificationCenterType === 1">
         <message-notice v-for="msg in messageNotices" :icon="msg.icon" :tip="msg.tip"
                         :title="msg.title" :body="msg.body" :time="msg.time"
-                        :key="msg.id"></message-notice>
+                        :showHeader="msg.showHeader" :key="msg.id"></message-notice>
       </div>
     </div>
   </transition>
@@ -102,6 +102,7 @@
   .notification-center-body {
     position: relative;
     height: calc(100% - 70px);
+    overflow-y: auto;
   }
 
   .notification-center-body-calendar {

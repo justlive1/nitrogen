@@ -23,7 +23,7 @@
 <style scoped>
   .notice {
     width: 100%;
-    height: 100px;
+    margin: 5px 0;
   }
 
   .notice .notice-header {

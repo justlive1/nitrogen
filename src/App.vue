@@ -13,6 +13,7 @@
   import Dock from './components/Dock';
   import Tools from './components/Tools';
   import NotificationCenter from './components/NotificationCenter';
+  import Calendar from "./components/Calendar";
 
   export default {
     name: 'app',
@@ -37,14 +38,29 @@
     mounted() {
       document.getElementById('app').style.backgroundImage = this.mainUrl;
 
-      this.addMessage({
-        id: ~~(Math.random() * 10000),
-        icon: 'images/message.png',
-        tip: '消息',
-        title: '分布式任务调度',
-        body: '登录账号：frost 登录密码：frost',
-        time: new Date()
-      });
+      let _that = this;
+      setTimeout(function () {
+        _that.addMessage({
+          id: ~~(Math.random() * 10000),
+          icon: 'images/frost.png',
+          tip: '分布式任务调度',
+          title: '默认账号',
+          body: '账号：frost 密码：frost',
+          time: new Date()
+        });
+      }, 3000);
+
+      setTimeout(function () {
+        _that.addMessage({
+          id: ~~(Math.random() * 10000),
+          icon: 'images/message.png',
+          tip: '消息',
+          title: '官方QQ',
+          body: '1106088328',
+          time: new Date()
+        });
+      }, 6000);
+
     },
     methods: {
       showNotificationCenter: function (payload) {
@@ -52,6 +68,22 @@
       },
       addMessage: function (message) {
         this.messageNotices.push(message);
+        this.sortMessage();
+        new Audio("sounds/ping.mp3").play();
+      },
+      sortMessage: function () {
+        this.messageNotices.sort(
+            (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
+        let dateMap = {};
+        this.messageNotices.forEach(function (value) {
+          let dateStr = Calendar.dateOfYear(new Date(value.time));
+          if (dateMap[dateStr]) {
+            value.showHeader = false;
+          } else {
+            dateMap[dateStr] = 1;
+            value.showHeader = true;
+          }
+        });
       }
     }
   }

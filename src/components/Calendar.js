@@ -145,10 +145,8 @@ export default {
     // >3天 返回日期
     if (offset > 3) {
       return (date.getMonth() + 1) + '月' + date.getDate() + '日';
-    } else if (offset > 1) {
+    } else if (offset > 0) {
       return offset + '天前';
-    } else if (offset === 1) {
-      return '昨天';
     } else {
       return '今天';
     }
