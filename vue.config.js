@@ -7,7 +7,8 @@ module.exports = {
   },
   configureWebpack: {
     externals: {
-      "vue": "Vue"
+      "vue": "Vue",
+      "vuex": "Vuex"
     }
   }
 }

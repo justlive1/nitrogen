@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <div class="notification-center" v-show="notificationCenterVisible">
+    <div class="notification-center" v-show="this.$store.state.desktop.notificationCenterVisible">
       <div class="notification-center-header">
         <div :class="{active: notificationCenterType === 0}"
              @click="notificationCenterTypeChange(0)">今天
@@ -18,12 +18,11 @@
         <weather-notice></weather-notice>
 
         <copyright></copyright>
-
       </div>
       <div class="notification-center-body" v-if="notificationCenterType === 1">
-        <message-notice v-for="msg in messageNotices" :icon="msg.icon" :tip="msg.tip"
-                        :title="msg.title" :body="msg.body" :time="msg.time"
-                        :showHeader="msg.showHeader" :key="msg.id"></message-notice>
+        <message-notice v-for="msg in this.$store.state.desktop.messageNotices" :icon="msg.icon"
+                        :tip="msg.tip" :title="msg.title" :body="msg.body" :time="msg.time"
+                        :showHeader="msg.showHeader" :id="msg.id" :key="msg.id"></message-notice>
       </div>
     </div>
   </transition>
@@ -38,7 +37,6 @@
   export default {
     name: "NotificationCenter",
     props: {
-      notificationCenterVisible: Boolean,
       messageNotices: Array
     },
     components: {

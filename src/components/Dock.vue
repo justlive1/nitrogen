@@ -10,7 +10,7 @@
         <span>launchpad</span>
         <img class="dock-item" src="images/launchpad.png" alt="launchpad"/>
       </a>
-      <a v-for="dock in docks" :key="dock.alt" @click="dockClick(dock)">
+      <a v-for="dock in this.$store.state.desktop.docks" :key="dock.alt" @click="dockClick(dock)">
         <span>{{dock.alt}}</span>
         <img class="dock-item" :src="dock.src" :alt="dock.alt"/>
       </a>
@@ -30,7 +30,6 @@
 
   export default {
     name: "Dock",
-    props: ['docks'],
     mounted() {
       const dockWrap = document.getElementsByClassName('dock-container')[0];
       const dockItems = document.getElementsByClassName('dock-item');

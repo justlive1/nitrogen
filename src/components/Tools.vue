@@ -32,7 +32,7 @@
     methods: {
       notificationCenterClick: function () {
         this.notificationCenterVisible = !this.notificationCenterVisible;
-        this.$emit('showNotificationCenter', this.notificationCenterVisible);
+        this.$store.commit('desktop/changeNotificationCenterVisible', this.notificationCenterVisible);
       }
     }
   }

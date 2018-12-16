@@ -2,7 +2,7 @@
   <div id="app">
     <tools v-on:showNotificationCenter="showNotificationCenter"></tools>
     <desktop></desktop>
-    <dock :docks="docks"></dock>
+    <dock></dock>
     <notification-center :notificationCenterVisible="notificationCenterVisible"
                          :messageNotices="messageNotices"></notification-center>
   </div>
@@ -13,7 +13,6 @@
   import Dock from './components/Dock';
   import Tools from './components/Tools';
   import NotificationCenter from './components/NotificationCenter';
-  import Calendar from "./components/Calendar";
 
   export default {
     name: 'app',
@@ -23,14 +22,16 @@
     data() {
       return {
         mainUrl: 'url(images/main.jpg)',
-        docks: [],
         notificationCenterVisible: false,
         messageNotices: []
       }
     },
     created() {
+      let _that = this;
       if (process.env.VUE_APP_DOCK_MODE === 'static') {
-        this.docks = JSON.parse(process.env.VUE_APP_DOCK_VAL);
+        JSON.parse(process.env.VUE_APP_DOCK_VAL).forEach(function (item) {
+          _that.$store.commit('desktop/addDock', item);
+        });
       } else {
         //ajax
       }
@@ -67,23 +68,7 @@
         this.notificationCenterVisible = payload;
       },
       addMessage: function (message) {
-        this.messageNotices.push(message);
-        this.sortMessage();
-        new Audio("sounds/ping.mp3").play();
-      },
-      sortMessage: function () {
-        this.messageNotices.sort(
-            (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
-        let dateMap = {};
-        this.messageNotices.forEach(function (value) {
-          let dateStr = Calendar.dateOfYear(new Date(value.time));
-          if (dateMap[dateStr]) {
-            value.showHeader = false;
-          } else {
-            dateMap[dateStr] = 1;
-            value.showHeader = true;
-          }
-        });
+        this.$store.dispatch('desktop/addMessage', message);
       }
     }
   }

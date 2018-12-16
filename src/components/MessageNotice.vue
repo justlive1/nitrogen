@@ -3,7 +3,8 @@
     <div class="message-header" v-if="showHeader">
       <div class="message-header-time">{{dayAgo}}</div>
       <div class="message-header-close">
-        <i class="fa fa-times-circle" aria-hidden="true"></i>
+        <i class="fa fa-times-circle" aria-hidden="true"
+           @click="messageHeaderCloseClick(dateStr)"></i>
       </div>
     </div>
     <notice class="message-notice">
@@ -14,7 +15,8 @@
         <span class="message-tip">{{tip}}</span>
         <span class="message-time">
           <span class="message-time-text">{{timeAgo}}</span>
-          <i class="fa fa-times-circle message-time-close" aria-hidden="true"></i>
+          <i class="fa fa-times-circle message-time-close" aria-hidden="true"
+             @click="messageTimeCloseClick(id)"></i>
         </span>
       </template>
       <template slot="notice-body">
@@ -37,6 +39,7 @@
       Notice
     },
     props: {
+      id: String,
       showHeader: Boolean,
       icon: String,
       tip: String,
@@ -50,8 +53,18 @@
       },
       dayAgo: function () {
         return Calendar.dayAgo(this.time);
+      },
+      dateStr: function () {
+        return Calendar.dateOfYear(this.time)
       }
-
+    },
+    methods: {
+      messageHeaderCloseClick: function (dateStr) {
+        this.$store.dispatch('desktop/removeMessageByDate', dateStr);
+      },
+      messageTimeCloseClick: function (id) {
+        this.$store.dispatch('desktop/removeMessageById', id);
+      }
     }
   }
 </script>
