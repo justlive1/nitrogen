@@ -55,7 +55,7 @@
         return Calendar.dayAgo(this.time);
       },
       dateStr: function () {
-        return Calendar.dateOfYear(this.time)
+        return Calendar.dateOfYear(new Date(this.time));
       }
     },
     methods: {

@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    <tools v-on:showNotificationCenter="showNotificationCenter"></tools>
+    <tools></tools>
     <desktop></desktop>
     <dock></dock>
-    <notification-center :notificationCenterVisible="notificationCenterVisible"
-                         :messageNotices="messageNotices"></notification-center>
+    <notification-center></notification-center>
   </div>
 </template>
 
@@ -21,9 +20,7 @@
     },
     data() {
       return {
-        mainUrl: 'url(images/main.jpg)',
-        notificationCenterVisible: false,
-        messageNotices: []
+        mainUrl: 'url(images/main.jpg)'
       }
     },
     created() {
@@ -63,9 +60,6 @@
 
     },
     methods: {
-      showNotificationCenter: function (payload) {
-        this.notificationCenterVisible = payload;
-      },
       addMessage: function (message, ding) {
         this.$store.dispatch('desktop/addMessage', message);
         if (ding) {

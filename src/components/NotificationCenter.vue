@@ -36,9 +36,6 @@
 
   export default {
     name: "NotificationCenter",
-    props: {
-      messageNotices: Array
-    },
     components: {
       WeatherNotice, MessageNotice, Copyright
     },
