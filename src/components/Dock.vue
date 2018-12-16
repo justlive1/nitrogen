@@ -31,13 +31,21 @@
   export default {
     name: "Dock",
     mounted() {
-      const dockWrap = document.getElementsByClassName('dock-container')[0];
-      const dockItems = document.getElementsByClassName('dock-item');
-      const dockMask = document.getElementsByClassName('dock-mask')[0];
-      this.initDockItem(dockItems, dockMask);
-      dockWrap.addEventListener('mousemove',
-          e => this.mouseOnDockItem(e, dockWrap, dockItems, dockMask));
-      dockWrap.addEventListener('mouseleave', () => this.initDockItem(dockItems, dockMask));
+      let _that = this;
+      axios.get("docks.json").then(function (res) {
+        res.data.forEach(function (item) {
+          _that.$store.commit('desktop/addDock', item);
+        });
+        setTimeout(function () {
+          const dockWrap = document.getElementsByClassName('dock-container')[0];
+          const dockItems = document.getElementsByClassName('dock-item');
+          const dockMask = document.getElementsByClassName('dock-mask')[0];
+          _that.initDockItem(dockItems, dockMask);
+          dockWrap.addEventListener('mousemove',
+              e => _that.mouseOnDockItem(e, dockWrap, dockItems, dockMask));
+          dockWrap.addEventListener('mouseleave', () => _that.initDockItem(dockItems, dockMask));
+        }, 0);
+      });
     },
     methods: {
       getOffsetTop: function (el) {
@@ -112,6 +120,10 @@
     top: -25px;
     width: 105px;
     color: #fff;
+  }
+
+  .dock .dock-container img {
+    max-width: 130px;
   }
 
   .dock .dock-container img:hover {

@@ -14,7 +14,6 @@ const actions = {
   addMessage({commit}, msg) {
     commit('addMessageNotice', msg);
     commit('sortMessageNotice');
-    new Audio('sounds/ping.mp3').play();
   },
   removeMessageById({commit}, id) {
     commit('removeMessageById', id);

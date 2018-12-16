@@ -27,39 +27,38 @@
       }
     },
     created() {
-      let _that = this;
-      if (process.env.VUE_APP_DOCK_MODE === 'static') {
-        JSON.parse(process.env.VUE_APP_DOCK_VAL).forEach(function (item) {
-          _that.$store.commit('desktop/addDock', item);
-        });
-      } else {
-        //ajax
-      }
     },
     mounted() {
       document.getElementById('app').style.backgroundImage = this.mainUrl;
 
       let _that = this;
+
+      axios.get("messages.json").then(function (res) {
+        res.data.forEach(function (item) {
+          _that.addMessage(item);
+        });
+      });
+
       setTimeout(function () {
         _that.addMessage({
-          id: ~~(Math.random() * 10000),
+          id: 'N1',
           icon: 'images/frost.png',
           tip: '分布式任务调度',
           title: '默认账号',
           body: '账号：frost 密码：frost',
           time: new Date()
-        });
+        }, true);
       }, 3000);
 
       setTimeout(function () {
         _that.addMessage({
-          id: ~~(Math.random() * 10000),
+          id: 'N2',
           icon: 'images/message.png',
           tip: '消息',
           title: '官方QQ',
           body: '1106088328',
           time: new Date()
-        });
+        }, true);
       }, 6000);
 
     },
@@ -67,8 +66,11 @@
       showNotificationCenter: function (payload) {
         this.notificationCenterVisible = payload;
       },
-      addMessage: function (message) {
+      addMessage: function (message, ding) {
         this.$store.dispatch('desktop/addMessage', message);
+        if (ding) {
+          new Audio('sounds/ping.mp3').play();
+        }
       }
     }
   }
