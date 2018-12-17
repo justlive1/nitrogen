@@ -30,6 +30,7 @@
 
       let _that = this;
 
+      // eslint-disable-next-line
       axios.get("messages.json").then(function (res) {
         res.data.forEach(function (item) {
           _that.addMessage(item);
