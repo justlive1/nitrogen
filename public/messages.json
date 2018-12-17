@@ -6,5 +6,13 @@
     "title": "oxygen - 轻量级Java框架",
     "body": "v1.2.0 已经发布啦<br><a href='https://maven-badges.herokuapp.com/maven-central/vip.justlive/oxygen/' target='_blank'><img src='https://maven-badges.herokuapp.com/maven-central/vip.justlive/oxygen/badge.svg' alt='Maven Central'></a><a href='https://www.apache.org/licenses/LICENSE-2.0.html' target='_blank'><img src='https://img.shields.io/badge/license-Apache%202-4EB1BA.svg' alt='License'></a><br>详情<i class='fa fa-hand-o-right'></i>：<a href='https://gitee.com/justlive1/oxygen' target='_blank'>https://gitee.com/justlive1/oxygen</a>",
     "time": "2018-12-14 17:12:03"
+  },
+  {
+    "id": "L2",
+    "icon": "images/message.png",
+    "tip": "消息",
+    "title": "阿里云福利",
+    "body": "最高<span style='color: rgb(255, 138, 0);'>￥1888</span>云产品通用代金券<br>详情<i class='fa fa-hand-o-right'></i>：<a href='https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=fc8ydi4y' style='word-break: break-all;' target='_blank'>https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=fc8ydi4y</a>",
+    "time": "2018-12-12 12:12:12"
   }
 ]

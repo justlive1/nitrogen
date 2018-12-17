@@ -8,8 +8,9 @@
     <div class="tools-right">
       <div class="tools-icon"><span class="fa fa-battery-full"></span></div>
       <timer></timer>
-      <div class="tools-icon tools-notification-center" @click="notificationCenterClick()"><span
-          class="fa fa-list-ul"></span>
+      <div class="tools-icon tools-notification-center" @click="notificationCenterClick()">
+        <span
+            :class="['fa', {'fa-list-ul':notificationCenterNoMessage()}, {'fa-comment-o on-new-msg':!notificationCenterNoMessage()},{'fa-commenting-o':notificationCenterMessageFlicker()}]"></span>
       </div>
       <div class="tools-icon tools-show-desktop">
         <span>&nbsp;</span>
@@ -27,12 +28,32 @@
       Timer
     },
     data() {
-      return {notificationCenterVisible: false}
+      return {
+        notificationCenterVisible: false,
+        notificationCenterMessageCount: 0,
+      }
+    },
+    created() {
+      let _that = this;
+      if (window.intervalArr) {
+        window.intervalArr.forEach(item => clearInterval(item));
+      }
+      window.intervalArr = [setInterval(function () {
+        _that.notificationCenterMessageCount += 1;
+      }, 600)];
     },
     methods: {
       notificationCenterClick: function () {
         this.notificationCenterVisible = !this.notificationCenterVisible;
-        this.$store.commit('desktop/changeNotificationCenterVisible', this.notificationCenterVisible);
+        this.$store.commit('desktop/changeNotificationCenterVisible',
+            this.notificationCenterVisible);
+      },
+      notificationCenterNoMessage: function () {
+        return this.$store.state.desktop.messageNotices.length === 0;
+      },
+      notificationCenterMessageFlicker: function () {
+        return ((this.notificationCenterMessageCount % 2) === 0)
+            && !this.notificationCenterNoMessage();
       }
     }
   }
