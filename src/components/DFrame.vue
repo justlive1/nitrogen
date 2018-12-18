@@ -1,7 +1,9 @@
 <template>
-  <div class="d-frame" :data-id="data.id">
+  <div :class="['d-frame', {'d-frame-full': fullScreen}]" :data-id="data.id">
     <div class="d-frame-title">
-      <div class="d-frame-title-operation"></div>
+      <div class="d-frame-title-operation">
+        
+      </div>
       <div class="d-frame-title-content">
         <img :src="data.icon"/>
         <span>{{data.title}}</span>
@@ -18,6 +20,13 @@
     name: "DFrame",
     props: {
       data: Object
+    },
+    data() {
+      return {
+        leftOffset: 5,
+        topOffset: 1,
+        fullScreen: false
+      }
     }
   }
 </script>
@@ -29,6 +38,11 @@
     position: fixed;
     left: 5%;
     top: 50px;
+  }
+
+  .d-frame .d-frame-full {
+    width: 100%;
+    height: 100%;
   }
 
   .d-frame .d-frame-title {
