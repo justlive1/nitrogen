@@ -2,6 +2,7 @@ import Calendar from '../../components/Calendar'
 
 const state = {
   docks: [],
+  frames: [],
   messageNotices: [],
   notificationCenterVisible: false
 };
@@ -11,6 +12,9 @@ const getters = {};
 
 // actions
 const actions = {
+  addFrame({commit}, dframe) {
+    commit('addFrame', dframe);
+  },
   addMessage({commit}, msg) {
     commit('addMessageNotice', msg);
     commit('sortMessageNotice');
@@ -33,6 +37,13 @@ const mutations = {
       return;
     }
     state.docks.push(dock);
+  },
+  addFrame: (state, dframe) => {
+    let ids = state.frames.map(item => item.id);
+    if (ids.indexOf(dframe.id) > -1) {
+      return;
+    }
+    state.frames.push(dframe);
   },
   addMessageNotice: (state, msg) => {
     state.messageNotices.push(msg);

@@ -14,7 +14,7 @@
         <span>{{dock.alt}}</span>
         <img class="dock-item" :src="dock.src" :alt="dock.alt"/>
       </a>
-      <a>
+      <a @click="dockClick({type:'2', id:'maps', alt:'maps', url:'https://map.baidu.com', src: 'images/maps.png'})">
         <span>maps</span>
         <img class="dock-item" src="images/maps.png" alt="maps"/>
       </a>
@@ -32,6 +32,7 @@
     name: "Dock",
     mounted() {
       let _that = this;
+      // eslint-disable-next-line
       axios.get("docks.json").then(function (res) {
         res.data.forEach(function (item) {
           _that.$store.commit('desktop/addDock', item);
@@ -79,6 +80,13 @@
       dockClick: function (dock) {
         if (dock.type === '1') {
           window.open(dock.url);
+        } else if (dock.type === '2') {
+          this.$store.dispatch('desktop/addFrame', {
+            id: dock.id,
+            icon: dock.src,
+            title: dock.alt,
+            url: dock.url
+          })
         }
       }
     }
