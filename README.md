@@ -12,15 +12,15 @@
 
 
 通知中心1
-![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp1.jpg)
+![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp2.jpg)
 
 
 通知中心2
-![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp1.jpg)
+![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp3.jpg)
 
 
 窗口
-![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp1.jpg)
+![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp4.jpg)
 
 ## 快速开始
 
