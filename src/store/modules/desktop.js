@@ -4,7 +4,9 @@ const state = {
   docks: [],
   frames: [],
   messageNotices: [],
-  notificationCenterVisible: false
+  notificationCenterVisible: false,
+  framesOrder: 0,
+  framesOffset: 5
 };
 
 // getters
@@ -14,10 +16,14 @@ const getters = {};
 const actions = {
   addFrame({commit}, dframe) {
     commit('addFrame', dframe);
+    commit('refreshFrame', dframe);
   },
   addMessage({commit}, msg) {
     commit('addMessageNotice', msg);
     commit('sortMessageNotice');
+  },
+  closeFrame({commit}, item) {
+    commit('closeFrame', item);
   },
   removeMessageById({commit}, id) {
     commit('removeMessageById', id);
@@ -43,13 +49,49 @@ const mutations = {
     if (ids.indexOf(dframe.id) > -1) {
       return;
     }
+    let order = state.framesOrder + 1;
+    let offset = state.framesOffset;
+    if (order >= 10) {
+      order = 0;
+      offset -= 1;
+      if (offset < 0) {
+        offset = 5;
+      }
+    }
+    dframe.leftOffset = state.framesOffset + order;
+    dframe.topOffset = state.framesOffset + order;
+    dframe.order = 0;
+    state.framesOrder = order;
+    state.framesOffset = offset;
     state.frames.push(dframe);
   },
   addMessageNotice: (state, msg) => {
+    let ids = state.messageNotices.map(item => item.id);
+    if (ids.indexOf(msg.id) > -1) {
+      return;
+    }
     state.messageNotices.push(msg);
   },
   changeNotificationCenterVisible: (state, visible) => {
     state.notificationCenterVisible = visible;
+  },
+  closeFrame: (state, item) => {
+    state.frames.find(function (it, idx) {
+      if (it.id === item.id) {
+        state.frames.splice(idx, 1);
+        return true;
+      }
+      return false;
+    });
+  },
+  refreshFrame: (state, item) => {
+    state.frames.forEach(function (it) {
+      if (it.id === item.id) {
+        it.order = 1;
+      } else {
+        it.order = 0;
+      }
+    });
   },
   removeMessageById: (state, id) => {
     state.messageNotices.find(function (item, idx) {

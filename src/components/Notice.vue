@@ -30,6 +30,7 @@
     background-color: #dee7e7;
     height: 25px;
     border-radius: 5px 5px 0 0;
+    line-height: 25px;
   }
 
   .notice-header-icon {

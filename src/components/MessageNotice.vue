@@ -79,13 +79,14 @@
     font-size: 20px;
     display: inline-block;
     padding: 5px 20px 0 20px;
-    width: 110px;
   }
 
   .message-header-close {
     display: inline-block;
-    width: 140px;
     text-align: right;
+    float:right;
+    padding-right: 9px;
+    line-height: 35px;
   }
 
   .message-header-close i {
@@ -110,7 +111,6 @@
   .message-time {
     float: right;
     margin-right: 10px;
-    line-height: 22px;
     color: #4e4e4e;
   }
 

@@ -17,14 +17,14 @@
     "id": "3",
     "src": "images/blog.png",
     "alt": "blog",
-    "type": "1",
+    "type": "2",
     "url": "http://www.justlive.vip/blog"
   },
   {
     "id": "4",
     "src": "images/iBooks.png",
     "alt": "book",
-    "type": "1",
+    "type": "2",
     "url": "http://www.justlive.vip/library"
   },
   {
