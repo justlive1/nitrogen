@@ -6,7 +6,9 @@ const state = {
   messageNotices: [],
   notificationCenterVisible: false,
   framesOrder: 0,
-  framesOffset: 5
+  framesOffset: 5,
+  weather: {},
+  currentDate: new Date()
 };
 
 // getters
@@ -72,6 +74,9 @@ const mutations = {
     }
     state.messageNotices.push(msg);
   },
+  addWeather: (state, item) => {
+    state.weather = item;
+  },
   changeNotificationCenterVisible: (state, visible) => {
     state.notificationCenterVisible = visible;
   },
@@ -92,6 +97,9 @@ const mutations = {
         it.order = 0;
       }
     });
+  },
+  refreshTime: (state) => {
+    state.currentDate = new Date();
   },
   removeMessageById: (state, id) => {
     state.messageNotices.find(function (item, idx) {

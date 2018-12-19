@@ -36,6 +36,10 @@
           _that.addMessage(item);
         });
       });
+      // eslint-disable-next-line
+      axios.get("weather.json").then(function (res) {
+        _that.addWeather(res.data);
+      });
 
       setTimeout(function () {
         _that.addMessage({
@@ -66,6 +70,9 @@
         if (ding) {
           new Audio('sounds/ping.mp3').play();
         }
+      },
+      addWeather: function (weather) {
+        this.$store.commit('desktop/addWeather', weather);
       }
     }
   }

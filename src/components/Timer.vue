@@ -9,12 +9,14 @@
     name: "Timer",
     data() {
       return {
-        timer: Calendar.dateFormatMacOs()
+        timer: Calendar.dateFormatMacOs(this.$store.state.desktop.currentTime)
       }
     },
     created() {
-      setInterval(() => {
-        this.timer = Calendar.dateFormatMacOs();
+      let _that = this;
+      setInterval(function () {
+        _that.$store.commit('desktop/refreshTime');
+        _that.timer = Calendar.dateFormatMacOs(_that.$store.state.desktop.currentTime);
       }, 1000);
     }
   }

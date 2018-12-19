@@ -8,9 +8,15 @@
     </template>
     <template slot="notice-body">
       <div class="weather-item">
-        <div class="weather-city">{{weather.city}}</div>
-        <div class="weather-type">{{weather.type}}</div>
-        <div class="weather-temperature">{{weather.temperature}}</div>
+        <div class="weather-city">
+          <span class="weather-city-time">{{currentTime()}}</span>
+          <span class="weather-city-text">{{this.$store.state.desktop.weather.city}}</span>
+        </div>
+        <div class="weather-type">
+          <img :src="this.$store.state.desktop.weather.icon"
+               :alt="this.$store.state.desktop.weather.type"/>
+        </div>
+        <div class="weather-temperature">{{this.$store.state.desktop.weather.temperature}}</div>
       </div>
     </template>
   </notice>
@@ -24,18 +30,28 @@
     components: {
       Notice
     },
-    data() {
-      return {
-        weather: {city: '广州', temperature: '24', type: '晴'}
-      };
+    methods: {
+      currentTime: function () {
+        let hour = this.$store.state.desktop.currentDate.getHours();
+        let mins = this.$store.state.desktop.currentDate.getMinutes();
+        let value = '上午';
+        if (hour > 12) {
+          value = '下午';
+        }
+        value += hour + ":";
+        if (mins < 10) {
+          value += "0";
+        }
+        value += mins;
+        return value;
+      }
     }
   }
 </script>
 
 <style scoped>
   .weather-item {
-    height: 35px;
-    line-height: 35px;
+    height: 50px;
   }
 
   .weather-item div {
@@ -44,17 +60,40 @@
   }
 
   .weather-city {
-    width: 20%;
     float: left;
   }
 
+  .weather-city .weather-city-time {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    text-align: left;
+    margin: 5px 0 2px 10px;
+    color: #868585;
+  }
+
+  .weather-city .weather-city-text {
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    text-align: left;
+    margin: 0 0 5px 10px;
+  }
+
   .weather-type {
-    width: 55%;
-    text-align: right !important;
+    position: absolute;
+    right: 70px;
+  }
+
+  .weather-type img {
+    width: 30px;
+    margin: 5px;
   }
 
   .weather-temperature {
-    width: 20%;
     float: right;
+    font-size: 35px;
+    font-weight: 200;
+    margin-right: 10px;
   }
 </style>
