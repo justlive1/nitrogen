@@ -2,8 +2,25 @@
 
 ## 介绍
 基于vue的纯前端mac版桌面
+- Vue + font-awesome图标库纯手工定制
+- 基于请求ip获取定位天气
+- dock可配置
+- 提供消息通知
 
-![效果图](https://gitee.com/justlive1/nitrogen/raw/master/public/images/snapshot.jpg)
+桌面Dock效果
+![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp1.jpg)
+
+
+通知中心1
+![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp1.jpg)
+
+
+通知中心2
+![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp1.jpg)
+
+
+窗口
+![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp1.jpg)
 
 ## 快速开始
 
