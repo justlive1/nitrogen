@@ -31,14 +31,18 @@
       let _that = this;
 
       // eslint-disable-next-line
-      axios.get("messages.json").then(function (res) {
-        res.data.forEach(function (item) {
-          _that.addMessage(item);
-        });
+      axios.get(process.env.VUE_APP_MESSAGE_URL).then(function (res) {
+        if (res.data.success) {
+          res.data.data.forEach(function (item) {
+            _that.addMessage(item);
+          })
+        }
       });
       // eslint-disable-next-line
-      axios.get("weather.json").then(function (res) {
-        _that.addWeather(res.data);
+      axios.get(process.env.VUE_APP_WEATHER_URL).then(function (res) {
+        if (res.data.success) {
+          _that.addWeather(res.data.data);
+        }
       });
 
       setTimeout(function () {

@@ -1,5 +1,5 @@
 <template>
-  <notice>
+  <notice v-if="this.$store.state.desktop.weather">
     <template slot="notice-header-icon">
       <img class="notice-header-icon-img" src="images/weather.png"/>
     </template>
@@ -37,6 +37,7 @@
         let value = '上午';
         if (hour > 12) {
           value = '下午';
+          hour -= 12;
         }
         value += hour + ":";
         if (mins < 10) {

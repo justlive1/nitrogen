@@ -7,7 +7,7 @@ const state = {
   notificationCenterVisible: false,
   framesOrder: 0,
   framesOffset: 5,
-  weather: {},
+  weather: void 0,
   currentDate: new Date()
 };
 

@@ -33,10 +33,12 @@
     mounted() {
       let _that = this;
       // eslint-disable-next-line
-      axios.get("docks.json").then(function (res) {
-        res.data.forEach(function (item) {
-          _that.$store.commit('desktop/addDock', item);
-        });
+      axios.get(process.env.VUE_APP_DOCK_URL).then(function (res) {
+        if (res.data.success) {
+          res.data.data.forEach(function (item) {
+            _that.$store.commit('desktop/addDock', item);
+          });
+        }
         setTimeout(function () {
           const dockWrap = document.getElementsByClassName('dock-container')[0];
           const dockItems = document.getElementsByClassName('dock-item');
