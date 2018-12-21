@@ -44,4 +44,4 @@ npm run build
 
 E-mail: qq11419041@163.com
 
-QQ: 1106088328
+QQ群: 950216299
