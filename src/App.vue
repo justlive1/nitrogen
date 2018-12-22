@@ -18,25 +18,15 @@
     components: {
       Desktop, Dock, Tools, NotificationCenter
     },
-    data() {
-      return {
-        mainUrl: ''
-      }
-    },
-    created() {
-    },
     mounted() {
-
+      document.getElementById('app').style.backgroundImage = process.env.VUE_APP_MAIN_URL;
       let _that = this;
       // eslint-disable-next-line
       axios.get(process.env.VUE_APP_USER_DATA_URL).then(function (res) {
         if (res.data.success) {
-          document.getElementById('app').style.backgroundImage = res.data.data.mainUrl;
           res.data.data.docks.forEach(function (item) {
             _that.$store.commit('desktop/addDock', item);
           });
-        } else {
-          document.getElementById('app').style.backgroundImage = "url(images/main.jpg)";
         }
         setTimeout(function () {
           _that.$refs.dock_model.initDockItem();
