@@ -1,26 +1,11 @@
 <template>
-  <div class="dock">
+  <div class="dock"
+       v-if="this.$store.state.desktop.docks && this.$store.state.desktop.docks.length > 0">
     <div class="dock-mask"></div>
     <div class="dock-container">
-      <a>
-        <span>finder</span>
-        <img class="dock-item" src="images/finder.png" alt="finder"/>
-      </a>
-      <a>
-        <span>launchpad</span>
-        <img class="dock-item" src="images/launchpad.png" alt="launchpad"/>
-      </a>
       <a v-for="dock in this.$store.state.desktop.docks" :key="dock.alt" @click="dockClick(dock)">
         <span>{{dock.alt}}</span>
         <img class="dock-item" :src="dock.src" :alt="dock.alt"/>
-      </a>
-      <a @click="dockClick({type:'2', id:'maps', alt:'maps', url:'https://map.baidu.com', src: 'images/maps.png'})">
-        <span>maps</span>
-        <img class="dock-item" src="images/maps.png" alt="maps"/>
-      </a>
-      <a>
-        <span>trash</span>
-        <img class="dock-item" src="images/trash.png" alt="trash"/>
       </a>
     </div>
   </div>
@@ -30,26 +15,6 @@
 
   export default {
     name: "Dock",
-    mounted() {
-      let _that = this;
-      // eslint-disable-next-line
-      axios.get(process.env.VUE_APP_DOCK_URL).then(function (res) {
-        if (res.data.success) {
-          res.data.data.forEach(function (item) {
-            _that.$store.commit('desktop/addDock', item);
-          });
-        }
-        setTimeout(function () {
-          const dockWrap = document.getElementsByClassName('dock-container')[0];
-          const dockItems = document.getElementsByClassName('dock-item');
-          const dockMask = document.getElementsByClassName('dock-mask')[0];
-          _that.initDockItem(dockItems, dockMask);
-          dockWrap.addEventListener('mousemove',
-              e => _that.mouseOnDockItem(e, dockWrap, dockItems, dockMask));
-          dockWrap.addEventListener('mouseleave', () => _that.initDockItem(dockItems, dockMask));
-        }, 0);
-      });
-    },
     methods: {
       getOffsetTop: function (el) {
         if (el.offsetParent == null) {
@@ -57,11 +22,17 @@
         }
         return el.offsetTop + this.getOffsetTop(el.offsetParent);
       },
-      initDockItem: function (dockItems, dockMask) {
+      initDockItem: function () {
+        const dockWrap = document.getElementsByClassName('dock-container')[0];
+        const dockItems = document.getElementsByClassName('dock-item');
+        const dockMask = document.getElementsByClassName('dock-mask')[0];
         for (let i = 0; i < dockItems.length; i++) {
           dockItems[i].width = 60;
         }
         dockMask.style.width = dockItems.length * 60 + 40 + 'px';
+        dockWrap.addEventListener('mousemove',
+            e => this.mouseOnDockItem(e, dockWrap, dockItems, dockMask));
+        dockWrap.addEventListener('mouseleave', () => this.initDockItem(dockItems, dockMask));
       },
       mouseOnDockItem: function (e, dockWrap, dockItems, dockMask) {
         e = e || window.event;

@@ -1,0 +1,69 @@
+{
+  "code": "0000",
+  "success": true,
+  "data": {
+    "mainUrl": "url(images/main.jpg)",
+    "docks": [
+      {
+        "id": "1",
+        "src": "images/finder.png",
+        "alt": "finder",
+        "type": "0"
+      },
+      {
+        "id": "2",
+        "src": "images/launchpad.png",
+        "alt": "launchpad",
+        "type": "0"
+      },
+      {
+        "id": "3",
+        "src": "images/gitee.png",
+        "alt": "gitee",
+        "type": "1",
+        "url": "https://gitee.com/justlive1"
+      },
+      {
+        "id": "4",
+        "src": "images/github.png",
+        "alt": "github",
+        "type": "1",
+        "url": "https://github.com/justlive1"
+      },
+      {
+        "id": "5",
+        "src": "images/blog.png",
+        "alt": "blog",
+        "type": "2",
+        "url": "http://www.justlive.vip/blog"
+      },
+      {
+        "id": "6",
+        "src": "images/iBooks.png",
+        "alt": "book",
+        "type": "2",
+        "url": "http://www.justlive.vip/library"
+      },
+      {
+        "id": "7",
+        "src": "images/frost.png",
+        "alt": "分布式调度",
+        "type": "2",
+        "url": "http://www.justlive.vip/center/"
+      },
+      {
+        "id": "8",
+        "src": "images/maps.png",
+        "alt": "maps",
+        "type": "2",
+        "url": "https://map.baidu.com"
+      },
+      {
+        "id": "9",
+        "src": "images/trash.png",
+        "alt": "trash",
+        "type": "0"
+      }
+    ]
+  }
+}

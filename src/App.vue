@@ -2,7 +2,7 @@
   <div id="app">
     <tools></tools>
     <desktop></desktop>
-    <dock></dock>
+    <dock ref="dock_model"></dock>
     <notification-center></notification-center>
   </div>
 </template>
@@ -20,16 +20,28 @@
     },
     data() {
       return {
-        mainUrl: 'url(images/main.jpg)'
+        mainUrl: ''
       }
     },
     created() {
     },
     mounted() {
-      document.getElementById('app').style.backgroundImage = this.mainUrl;
 
       let _that = this;
-
+      // eslint-disable-next-line
+      axios.get(process.env.VUE_APP_USER_DATA_URL).then(function (res) {
+        if (res.data.success) {
+          document.getElementById('app').style.backgroundImage = res.data.data.mainUrl;
+          res.data.data.docks.forEach(function (item) {
+            _that.$store.commit('desktop/addDock', item);
+          });
+        } else {
+          document.getElementById('app').style.backgroundImage = "url(images/main.jpg)";
+        }
+        setTimeout(function () {
+          _that.$refs.dock_model.initDockItem();
+        }, 0);
+      });
       // eslint-disable-next-line
       axios.get(process.env.VUE_APP_MESSAGE_URL).then(function (res) {
         if (res.data.success) {
