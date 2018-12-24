@@ -32,37 +32,32 @@
       },
       {
         "id": "5",
-        "src": "images/blog.png",
-        "alt": "blog",
-        "type": "2",
-        "url": "http://www.justlive.vip/blog"
-      },
-      {
-        "id": "6",
-        "src": "images/iBooks.png",
-        "alt": "book",
-        "type": "2",
-        "url": "http://www.justlive.vip/library"
-      },
-      {
-        "id": "7",
-        "src": "images/frost.png",
-        "alt": "分布式调度",
-        "type": "2",
-        "url": "http://www.justlive.vip/center/"
-      },
-      {
-        "id": "8",
         "src": "images/maps.png",
         "alt": "maps",
         "type": "2",
         "url": "https://map.baidu.com"
       },
       {
-        "id": "9",
-        "src": "images/trash.png",
-        "alt": "trash",
-        "type": "0"
+        "id": "6",
+        "src": "images/blog.png",
+        "alt": "blog",
+        "type": "2",
+        "url": "http://www.justlive.vip/blog"
+      },
+      {
+        "id": "7",
+        "src": "images/iBooks.png",
+        "alt": "book",
+        "type": "2",
+        "url": "http://www.justlive.vip/library"
+      },
+
+      {
+        "id": "8",
+        "src": "images/frost.png",
+        "alt": "分布式调度",
+        "type": "2",
+        "url": "http://www.justlive.vip/center/"
       }
     ]
   }

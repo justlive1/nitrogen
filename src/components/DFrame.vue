@@ -1,10 +1,10 @@
 <template>
-  <div v-drag :class="['d-frame', {'d-frame-full': fullScreen}]" :data-id="data.id"
+  <div v-show="data.isShow" v-drag :class="['d-frame', {'d-frame-full': fullScreen}]" :data-id="data.id"
        v-bind:style="{left: data.leftOffset + '%', top: data.topOffset + '%', 'z-index': 125 + data.order}">
     <div class="d-frame-title" @click="frameClick()">
       <div class="d-frame-title-operation">
         <i class="fa fa-circle d-frame-operation-close" @click="closeFrame()"></i>
-        <i class="fa fa-circle d-frame-operation-minus"></i>
+        <i class="fa fa-circle d-frame-operation-minus" @click="minFrame()"></i>
         <i class="fa fa-circle d-frame-operation-full" @click="changeFullScreen()"></i>
       </div>
       <div class="d-frame-title-content">
@@ -32,12 +32,32 @@
     methods: {
       closeFrame: function () {
         this.$store.dispatch('desktop/closeFrame', this.data);
+        this.refreshDock();
       },
       changeFullScreen: function () {
         this.fullScreen = !this.fullScreen;
       },
       frameClick: function () {
         this.$store.commit('desktop/refreshFrame', this.data);
+      },
+      minFrame: function () {
+        this.$store.commit('desktop/addMinDock', {
+          id: this.data.id,
+          src: this.data.icon,
+          alt: this.data.title,
+          type: "3"
+        });
+        this.refreshDock();
+      },
+      refreshDock: function () {
+        setTimeout(function () {
+          const dockItems = document.getElementsByClassName('dock-item');
+          const dockMask = document.getElementsByClassName('dock-mask')[0];
+          for (let i = 0; i < dockItems.length; i++) {
+            dockItems[i].width = 60;
+          }
+          dockMask.style.width = dockItems.length * 60 + 40 + 'px';
+        }, 10);
       }
     },
     directives: {

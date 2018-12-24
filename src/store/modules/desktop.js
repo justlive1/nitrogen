@@ -3,6 +3,7 @@ import Calendar from '../../components/Calendar'
 const state = {
   docks: [],
   frames: [],
+  minDocks: [],
   messageNotices: [],
   notificationCenterVisible: false,
   framesOrder: 0,
@@ -19,6 +20,7 @@ const actions = {
   addFrame({commit}, dframe) {
     commit('addFrame', dframe);
     commit('refreshFrame', dframe);
+    commit('addDockDot', dframe.id);
   },
   addMessage({commit}, msg) {
     commit('addMessageNotice', msg);
@@ -44,7 +46,17 @@ const mutations = {
     if (ids.indexOf(dock.id) > -1) {
       return;
     }
+    dock.isOpen = false;
     state.docks.push(dock);
+  },
+  addDockDot: (state, id) => {
+    state.docks.find(function (it) {
+      if (it.id === id) {
+        it.isOpen = true;
+        return true;
+      }
+      return false;
+    });
   },
   addFrame: (state, dframe) => {
     let ids = state.frames.map(item => item.id);
@@ -63,9 +75,24 @@ const mutations = {
     dframe.leftOffset = state.framesOffset + order;
     dframe.topOffset = state.framesOffset + order;
     dframe.order = 0;
+    dframe.isShow = true;
     state.framesOrder = order;
     state.framesOffset = offset;
     state.frames.push(dframe);
+  },
+  addMinDock: (state, dock) => {
+    let ids = state.minDocks.map(item => item.id);
+    if (ids.indexOf(dock.id) > -1) {
+      return;
+    }
+    state.frames.find(function (it) {
+      if (it.id === dock.id) {
+        it.isShow = false;
+        return true;
+      }
+      return false;
+    });
+    state.minDocks.push(dock);
   },
   addMessageNotice: (state, msg) => {
     let ids = state.messageNotices.map(item => item.id);
@@ -88,6 +115,20 @@ const mutations = {
       }
       return false;
     });
+    state.minDocks.find(function (it, idx) {
+      if (it.id === item.id) {
+        state.minDocks.splice(idx, 1);
+        return true;
+      }
+      return false;
+    });
+    state.docks.find(function (it) {
+      if (it.id === item.id) {
+        it.isOpen = false;
+        return true;
+      }
+      return false;
+    });
   },
   refreshFrame: (state, item) => {
     state.frames.forEach(function (it) {
@@ -100,6 +141,22 @@ const mutations = {
   },
   refreshTime: (state) => {
     state.currentDate = new Date();
+  },
+  resetMinFrame: (state, id) => {
+    state.frames.find(function (it) {
+      if (it.id === id) {
+        it.isShow = true;
+        return true;
+      }
+      return false;
+    });
+    state.minDocks.find(function (it, idx) {
+      if (it.id === id) {
+        state.minDocks.splice(idx, 1);
+        return true;
+      }
+      return false;
+    });
   },
   removeMessageById: (state, id) => {
     state.messageNotices.find(function (item, idx) {
