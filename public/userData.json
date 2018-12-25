@@ -2,7 +2,6 @@
   "code": "0000",
   "success": true,
   "data": {
-    "mainUrl": "url(images/main.jpg)",
     "docks": [
       {
         "id": "1",
@@ -51,7 +50,6 @@
         "type": "2",
         "url": "http://www.justlive.vip/library"
       },
-
       {
         "id": "8",
         "src": "images/frost.png",

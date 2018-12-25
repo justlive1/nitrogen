@@ -8,7 +8,7 @@
           <span>{{dock.alt}}</span>
           <img class="dock-item" :src="dock.src" :alt="dock.alt"/>
         </a>
-        <i v-show="dock.isOpen" class="fa fa-circle dock-item-dot" aria-hidden="true"></i>
+        <img v-show="dock.isOpen" class="dock-item-dot" src="images/circle.png"/>
       </div>
       <a class="dock-item-split">
         <img src="images/split.jpg" alt="split"/>
@@ -72,7 +72,7 @@
           }
           dockItems[i].width = 120 * imgScale;
           if (dockItems[i].parentNode.nextElementSibling) {
-            dockItems[i].parentNode.nextElementSibling.style.marginLeft = (-2 - dockItems[i].width
+            dockItems[i].parentNode.nextElementSibling.style.marginLeft = (-5 - dockItems[i].width
                 / 2) + "px";
           }
           originalMaskWidth += dockItems[i].width;
@@ -143,7 +143,8 @@
     position: absolute;
     bottom: -5px;
     color: #b9b9b9;
-    font-size: 1px;
+    width: 10px;
+    height: 10px;
   }
 
   .dock .dock-container .dock-item-split {

@@ -30,7 +30,7 @@
         }
         setTimeout(function () {
           _that.$refs.dock_model.initDockItem();
-        }, 0);
+        }, 100);
       });
       // eslint-disable-next-line
       axios.get(process.env.VUE_APP_MESSAGE_URL).then(function (res) {
