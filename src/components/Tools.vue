@@ -35,10 +35,10 @@
     },
     created() {
       let _that = this;
-      if (window.intervalArr) {
-        window.intervalArr.forEach(item => clearInterval(item));
+      if (window.toolIntervalArr) {
+        window.toolIntervalArr.forEach(item => clearInterval(item));
       }
-      window.intervalArr = [setInterval(function () {
+      window.toolIntervalArr = [setInterval(function () {
         _that.notificationCenterMessageCount += 1;
       }, 600)];
     },

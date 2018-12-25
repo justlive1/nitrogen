@@ -14,10 +14,13 @@
     },
     created() {
       let _that = this;
-      setInterval(function () {
+      if (window.timerIntervalArr) {
+        window.timerIntervalArr.forEach(item => clearInterval(item));
+      }
+      window.timerIntervalArr = [setInterval(function () {
         _that.$store.commit('desktop/refreshTime');
         _that.timer = Calendar.dateFormatMacOs(_that.$store.state.desktop.currentTime);
-      }, 1000);
+      }, 1000)];
     }
   }
 </script>

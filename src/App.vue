@@ -3,6 +3,7 @@
     <tools></tools>
     <desktop></desktop>
     <dock ref="dock_model"></dock>
+    <notice-tip ref="notice_tip_model"></notice-tip>
     <notification-center></notification-center>
   </div>
 </template>
@@ -12,11 +13,12 @@
   import Dock from './components/Dock';
   import Tools from './components/Tools';
   import NotificationCenter from './components/NotificationCenter';
+  import NoticeTip from './components/NoticeTip';
 
   export default {
     name: 'app',
     components: {
-      Desktop, Dock, Tools, NotificationCenter
+      Desktop, Dock, Tools, NotificationCenter, NoticeTip
     },
     mounted() {
       document.getElementById('app').style.backgroundImage = process.env.VUE_APP_MAIN_URL;
@@ -76,6 +78,7 @@
         if (ding) {
           new Audio('sounds/ping.mp3').play();
         }
+        this.$refs.notice_tip_model.showTip(message);
       },
       addWeather: function (weather) {
         this.$store.commit('desktop/addWeather', weather);
