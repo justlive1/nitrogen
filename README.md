@@ -22,6 +22,12 @@
 窗口
 ![桌面](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp4.jpg)
 
+
+safari
+![safari](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp5.jpg)
+![safari](https://gitee.com/justlive1/nitrogen/raw/master/public/images/sp6.jpg)
+
+
 ## 快速开始
 
 安装node环境

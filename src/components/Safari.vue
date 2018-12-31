@@ -40,4 +40,8 @@
   .safari .safari-href {
     text-align: center;
   }
+
+  .safari .safari-href input {
+    width: 200px;
+  }
 </style>
