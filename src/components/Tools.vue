@@ -2,7 +2,7 @@
   <div class="tools">
     <div class="tools-left">
       <div class="tools-icon"><span class="fa fa-apple"></span></div>
-      <div class="tools-icon"><span class="fa fa-safari"></span></div>
+      <div class="tools-icon" @click="openSafari()"><span class="fa fa-safari"></span></div>
     </div>
     <div class="tools-middle"></div>
     <div class="tools-right">
@@ -54,6 +54,9 @@
       notificationCenterMessageFlicker: function () {
         return ((this.notificationCenterMessageCount % 2) === 0)
             && !this.notificationCenterNoMessage();
+      },
+      openSafari: function () {
+        this.$store.commit("desktop/openSafari");
       }
     }
   }

@@ -1,5 +1,6 @@
 <template>
-  <div v-show="data.isShow" v-drag :class="['d-frame', {'d-frame-full': fullScreen}]" :data-id="data.id"
+  <div v-show="data.isShow" v-drag :class="['d-frame', {'d-frame-full': fullScreen}]"
+       :data-id="data.id"
        v-bind:style="{left: data.leftOffset + '%', top: data.topOffset + '%', 'z-index': 125 + data.order}">
     <div class="d-frame-title" @click="frameClick()">
       <div class="d-frame-title-operation">
@@ -7,10 +8,12 @@
         <i class="fa fa-circle d-frame-operation-minus" @click="minFrame()"></i>
         <i class="fa fa-circle d-frame-operation-full" @click="changeFullScreen()"></i>
       </div>
-      <div class="d-frame-title-content">
-        <img :src="data.icon"/>
-        <span>{{data.title}}</span>
-      </div>
+      <slot name="d-frame-title-content">
+        <div class="d-frame-title-content">
+          <img :src="data.icon"/>
+          <span>{{data.title}}</span>
+        </div>
+      </slot>
     </div>
     <div class="d-frame-content">
       <iframe :src="data.url"></iframe>

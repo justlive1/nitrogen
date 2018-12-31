@@ -1,24 +1,43 @@
 <template>
-  <div class="safari">
-    <div class="safari-bar">
-      <div class="safari-bar-operation">
-        <i class="fa fa-circle safari-bar-operation-close"></i>
-        <i class="fa fa-circle safari-bar-operation-minus"></i>
-        <i class="fa fa-circle safari-bar-operation-full"></i>
+  <d-frame :data="data" class="safari">
+    <template slot="d-frame-title-content">
+      <div class="safari-href">
+        <input type="text" v-model="href" @keyup.enter="searchSafari()"/>
       </div>
-      <div class="safari-href"></div>
-    </div>
-    <div class="safari-content">
-    </div>
-  </div>
+    </template>
+  </d-frame>
 </template>
 
 <script>
+
+  import DFrame from './DFrame';
+
   export default {
-    name: "Safari"
+    name: "Safari",
+    components: {
+      DFrame
+    },
+    props: {
+      data: Object
+    },
+    data() {
+      return {
+        href: ''
+      }
+    },
+    methods: {
+      searchSafari: function () {
+        if (this.href.indexOf("http") <= -1) {
+          this.href = "http://" + this.href;
+        }
+        this.data.url = this.href;
+      }
+    }
   }
 </script>
 
 <style scoped>
-
+  .safari .safari-href {
+    text-align: center;
+  }
 </style>

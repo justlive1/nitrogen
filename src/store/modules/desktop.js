@@ -8,6 +8,17 @@ const state = {
   notificationCenterVisible: false,
   framesOrder: 0,
   framesOffset: 5,
+  safari: {
+    id: 'safari',
+    active: false,
+    isShow: true,
+    url: '',
+    title: 'safari',
+    icon: 'images/safari.png',
+    order: 0,
+    leftOffset: 8,
+    topOffset: 8
+  },
   weather: void 0,
   currentDate: new Date()
 };
@@ -93,6 +104,9 @@ const mutations = {
       return false;
     });
     state.minDocks.push(dock);
+    if (dock.id === 'safari') {
+      state.safari.isShow = false;
+    }
   },
   addMessageNotice: (state, msg) => {
     let ids = state.messageNotices.map(item => item.id);
@@ -129,6 +143,13 @@ const mutations = {
       }
       return false;
     });
+    if (item.id === 'safari') {
+      state.safari.active = false;
+    }
+  },
+  openSafari: (state) => {
+    state.safari.active = true;
+    state.safari.isShow = true;
   },
   refreshFrame: (state, item) => {
     state.frames.forEach(function (it) {
@@ -138,6 +159,9 @@ const mutations = {
         it.order = 0;
       }
     });
+    if (item.id === 'safari') {
+      state.safari.order = 1;
+    }
   },
   refreshTime: (state) => {
     state.currentDate = new Date();
@@ -157,6 +181,9 @@ const mutations = {
       }
       return false;
     });
+    if (id === 'safari') {
+      state.safari.isShow = true;
+    }
   },
   removeMessageById: (state, id) => {
     state.messageNotices.find(function (item, idx) {
