@@ -105,15 +105,4 @@
     background-size: 100% 100%;
   }
 
-  ::selection {
-    background: none;
-  }
-
-  ::-moz-selection {
-    background: none;
-  }
-
-  ::-webkit-selection {
-    background: none;
-  }
 </style>

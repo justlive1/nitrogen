@@ -161,6 +161,8 @@ const mutations = {
     });
     if (item.id === 'safari') {
       state.safari.order = 1;
+    } else {
+      state.safari.order = 0;
     }
   },
   refreshTime: (state) => {

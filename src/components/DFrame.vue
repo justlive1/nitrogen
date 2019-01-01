@@ -1,8 +1,8 @@
 <template>
-  <div v-show="data.isShow" v-drag :class="['d-frame', {'d-frame-full': fullScreen}]"
+  <div v-show="data.isShow" :class="['d-frame', {'d-frame-full': fullScreen}]"
        :data-id="data.id"
-       v-bind:style="{left: data.leftOffset + '%', top: data.topOffset + '%', 'z-index': 125 + data.order}">
-    <div class="d-frame-title" @click="frameClick()">
+       v-bind:style="{left: data.leftOffset + '%', top: data.topOffset + '%', 'z-index': 125 + data.order, width: width + 'px', height: height + 'px'}">
+    <div class="d-frame-title" v-drag @click="frameClick()">
       <div class="d-frame-title-operation">
         <i class="fa fa-circle d-frame-operation-close" @click="closeFrame()"></i>
         <i class="fa fa-circle d-frame-operation-minus" @click="minFrame()"></i>
@@ -17,6 +17,7 @@
     </div>
     <div class="d-frame-content">
       <iframe :src="data.url"></iframe>
+      <span class="d-frame-operation-resize" v-resize></span>
     </div>
   </div>
 </template>
@@ -29,7 +30,9 @@
     },
     data() {
       return {
-        fullScreen: false
+        fullScreen: false,
+        width: 1024,
+        height: 512
       }
     },
     methods: {
@@ -66,14 +69,35 @@
     directives: {
       drag(el) {
         el.onmousedown = function (e) {
-          let disx = e.pageX - el.offsetLeft;
-          let disy = e.pageY - el.offsetTop;
+          let disx = e.clientX - el.parentElement.offsetLeft;
+          let disy = e.clientY - el.parentElement.offsetTop;
+          el.style.cursor = 'move';
           document.onmousemove = function (e) {
-            el.style.left = e.pageX - disx + 'px';
-            el.style.top = e.pageY - disy + 'px';
+            window.getSelection().removeAllRanges();
+            el.parentElement.style.left = e.clientX - disx + 'px';
+            el.parentElement.style.top = e.clientY - disy + 'px';
           };
           document.onmouseup = function () {
             document.onmousemove = document.onmouseup = void 0;
+            el.style.cursor = 'unset';
+          };
+        }
+      },
+      resize(el, binding, vnode) {
+        el.onmousedown = function (e) {
+          let disx = e.clientX;
+          let disy = e.clientY;
+          let disw = vnode.context.width;
+          let dish = vnode.context.height;
+          el.style.cursor = 'nw-resize';
+          document.onmousemove = function (e) {
+            window.getSelection().removeAllRanges();
+            vnode.context.width = disw + e.clientX - disx;
+            vnode.context.height = dish + e.clientY - disy;
+          };
+          document.onmouseup = function () {
+            document.onmousemove = document.onmouseup = void 0;
+            el.style.cursor = 'unset';
           };
         }
       }
@@ -83,8 +107,8 @@
 
 <style scoped>
   .d-frame {
-    width: 80%;
-    height: 80%;
+    /*width: 80%;*/
+    /*height: 80%;*/
     position: fixed;
   }
 
@@ -166,5 +190,15 @@
     width: 100%;
     height: 100%;
     border: 0;
+  }
+
+  .d-frame-operation-resize {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    z-index: 100;
+    background: url('/images/resize.png') no-repeat;
   }
 </style>
