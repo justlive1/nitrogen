@@ -141,10 +141,15 @@ export default {
   dayAgo: function (time) {
     let date = new Date(time);
     let now = new Date();
-    let offset = now.getDate() - date.getDate()
+    let offset = ~~((now.getTime() - date.getTime()) / 1000 / 60 / 60 / 24);
     // >3天 返回日期
     if (offset > 3) {
-      return (date.getMonth() + 1) + '月' + date.getDate() + '日';
+      let result = '';
+      if (now.getFullYear() > date.getFullYear()) {
+        result += date.getFullYear() + '年';
+      }
+      result += (date.getMonth() + 1) + '月' + date.getDate() + '日'
+      return result;
     } else if (offset > 0) {
       return offset + '天前';
     } else {
