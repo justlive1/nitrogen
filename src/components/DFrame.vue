@@ -107,14 +107,12 @@
 
 <style scoped>
   .d-frame {
-    /*width: 80%;*/
-    /*height: 80%;*/
     position: fixed;
   }
 
   .d-frame.d-frame-full {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     left: 0 !important;
     top: 0 !important;
   }
