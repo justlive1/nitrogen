@@ -16,7 +16,8 @@
       </slot>
     </div>
     <div class="d-frame-content">
-      <iframe :src="data.url"></iframe>
+      <iframe :src="data.url" v-if="data.url"></iframe>
+      <div v-html="data.html" v-if="data.html"></div>
       <span class="d-frame-operation-resize" v-resize></span>
     </div>
   </div>
@@ -31,8 +32,8 @@
     data() {
       return {
         fullScreen: false,
-        width: 1024,
-        height: 512
+        width: this.data.width || 1024,
+        height: this.data.height || 512
       }
     },
     methods: {

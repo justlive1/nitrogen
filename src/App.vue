@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <tools></tools>
+    <preference></preference>
     <desktop></desktop>
     <dock ref="dock_model"></dock>
     <notice-tip ref="notice_tip_model"></notice-tip>
@@ -11,14 +12,15 @@
 <script>
   import Desktop from './components/Desktop';
   import Dock from './components/Dock';
-  import Tools from './components/Tools';
+  import Preference from './components/Preference';
   import NotificationCenter from './components/NotificationCenter';
   import NoticeTip from './components/NoticeTip';
+  import Tools from './components/Tools';
 
   export default {
     name: 'app',
     components: {
-      Desktop, Dock, Tools, NotificationCenter, NoticeTip
+      Desktop, Dock, Preference, NotificationCenter, NoticeTip, Tools
     },
     mounted() {
       document.getElementById('app').style.backgroundImage = process.env.VUE_APP_MAIN_URL;

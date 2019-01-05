@@ -8,6 +8,7 @@ const state = {
   notificationCenterVisible: false,
   framesOrder: 0,
   framesOffset: 5,
+  preferenceVisiable: false,
   safari: {
     id: 'safari',
     active: false,
@@ -218,6 +219,9 @@ const mutations = {
         value.showHeader = true;
       }
     });
+  },
+  togglePreference: (state) => {
+    state.preferenceVisiable = !state.preferenceVisiable;
   }
 };
 

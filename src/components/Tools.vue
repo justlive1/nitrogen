@@ -1,7 +1,8 @@
 <template>
   <div class="tools">
     <div class="tools-left">
-      <div class="tools-icon"><span class="fa fa-apple"></span></div>
+      <div :class="['tools-icon', {clicked:this.$store.state.desktop.preferenceVisiable}]"
+           @click="togglePreference()"><span class="fa fa-apple"></span></div>
       <div class="tools-icon" @click="openSafari()"><span class="fa fa-safari"></span></div>
     </div>
     <div class="tools-middle"></div>
@@ -57,6 +58,9 @@
       },
       openSafari: function () {
         this.$store.commit("desktop/openSafari");
+      },
+      togglePreference: function () {
+        this.$store.commit("desktop/togglePreference");
       }
     }
   }
@@ -78,6 +82,7 @@
     width: 200px;
     height: 100%;
     float: left;
+    margin-left: 8px;
   }
 
   .tools-icon {
@@ -87,7 +92,7 @@
     display: inline-block;
   }
 
-  .tools .tools-icon:hover {
+  .tools .tools-icon:hover, .tools .tools-icon.clicked {
     color: white;
     background-color: rgba(49, 156, 241, 0.71);
     cursor: pointer;
